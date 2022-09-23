@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HaikuLab3.Models;
+using Newtonsoft.Json;
 
 namespace HaikuLab3.Controllers
 {
@@ -16,6 +17,12 @@ namespace HaikuLab3.Controllers
 
         }
 
+        public IActionResult InsertUserFail()
+        {
+            return View();
+
+        }
+
         [HttpGet]
         public IActionResult InsertUserForm()
         {
@@ -25,6 +32,7 @@ namespace HaikuLab3.Controllers
         [HttpPost]
         public IActionResult InsertUserForm(UserDetail ud)
         {
+            
             UserMethods um = new UserMethods();
             int i = 0;
             string error = "";
@@ -34,8 +42,44 @@ namespace HaikuLab3.Controllers
             ViewBag.error = error;
             ViewBag.antal = i;
 
+            if (error == "")
+            {
+                string u = JsonConvert.SerializeObject(ud);
+                HttpContext.Session.SetString("testSession", u);
+                return View("InsertUser");
+            } else
+            {
+                return View("InsertUserFail");
+            }
+            
 
-            return View("InsertUser");
+
+        }
+
+        [HttpGet]
+        public IActionResult TestSessionVar(UserDetail ud)
+        {
+            UserDetail uu = new UserDetail();
+            string jsonstring = HttpContext.Session.GetString("testSession");
+            if (jsonstring == null)
+            {
+                return View("Index");
+            }
+            uu = JsonConvert.DeserializeObject<UserDetail>(jsonstring);
+            ViewBag.jsonstring = jsonstring;
+
+            UserMethods um = new UserMethods();
+            int i = 0;
+            string error = "";
+
+            i = um.UpdateUser(uu, out error);
+
+            ViewBag.error = error;
+            ViewBag.antal = i;
+
+
+            return View(uu);
+            
         }
 
         
