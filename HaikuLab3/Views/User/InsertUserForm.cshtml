@@ -1,0 +1,52 @@
+﻿@model HaikuLab3.Models.UserDetail
+
+@{
+    ViewData["Title"] = "InsertUserForm";
+}
+
+<h1>Skapa användare</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="InsertUserForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Us_Fname" class="control-label">Förnamn</label>
+                <input asp-for="Us_Fname" class="form-control" />
+                <span asp-validation-for="Us_Fname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Us_Lname" class="control-label">Efternamn</label>
+                <input asp-for="Us_Lname" class="form-control" />
+                <span asp-validation-for="Us_Lname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Us_Alias" class="control-label">Alias</label>
+                <input asp-for="Us_Alias" class="form-control" />
+                <span asp-validation-for="Us_Alias" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Us_Age" class="control-label">Födelseår</label>
+                <input asp-for="Us_Age" class="form-control" min="1910" max="2022" />
+                <span asp-validation-for="Us_Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Us_Email" class="control-label">Email</label>
+                <input asp-for="Us_Email" class="form-control" />
+                <span asp-validation-for="Us_Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skapa" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Tillbaka till startsidan</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
