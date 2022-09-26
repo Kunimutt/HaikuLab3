@@ -16,7 +16,7 @@
 
         //public DateTime Ha_Date { get; set; } // osäker på denna
 
-        public byte? Ha_Photo { get; set; } // osäker på om det ska vara string
+        //public byte? Ha_Photo { get; set; } // osäker på om det ska vara string
 
         public string Ha_Genre {get; set; }
     }
