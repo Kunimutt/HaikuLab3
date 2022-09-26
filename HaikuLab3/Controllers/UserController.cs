@@ -76,6 +76,7 @@ namespace HaikuLab3.Controllers
 
             ViewBag.error = error;
             ViewBag.antal = i;
+            TempData["Test"] = uu.Us_Alias; 
 
 
             return View(uu);

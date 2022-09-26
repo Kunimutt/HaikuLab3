@@ -39,11 +39,11 @@ namespace HaikuLab3.Controllers
             }
             else
             {
-                return View("InsertUserFail");
+                return View("InsertHaikuFail");
             }
 
 
-            return View();
+            //return View();
         }
     }
 }
