@@ -28,5 +28,31 @@ namespace HaikuLab3.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult ShowAllHaiku()
+        {
+            List<HaikuList> Haikulist = new List<HaikuList>();
+            HaikuListMethods hm = new HaikuListMethods();
+            string error = "";
+            Haikulist = hm.SelectHaikuList(out error);
+            ViewBag.error = error;
+            return View(Haikulist);
+        }
+
+        [HttpGet]
+        public IActionResult FilterHaiku()
+        { return View(); 
+        }
+
+        [HttpPost]
+        public IActionResult FilterHaiku(HaikuList haikuList)
+        {
+            List<HaikuList> Haikulist = new List<HaikuList>();
+            HaikuListMethods hm = new HaikuListMethods();
+            string error = "";
+            Haikulist = hm.FilterHaikuList(haikuList, out error);
+            ViewBag.error = error;
+            return View(Haikulist);
+        }
     }
 }

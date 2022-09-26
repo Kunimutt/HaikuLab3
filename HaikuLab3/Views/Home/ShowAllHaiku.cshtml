@@ -1,0 +1,64 @@
+﻿@model IEnumerable<HaikuLab3.Models.HaikuList>
+
+@{
+    ViewData["Title"] = "ShowAllHaiku";
+}
+
+<h1>Visa alla Haiku</h1>
+
+<form asp-action="FilterHaiku">
+ <div class="form-group">
+                <label> Välj en genre</label>
+                <select id= "Hl_Genre" name ="Ha_Genre">
+                    <option value = "drama">Drama</option>
+                    <option value = "skräck">Skräck</option>
+                    <option value = "komedi">Komedi</option>
+                    <option value = "djur">Djur</option>
+                    <option value = "Högtid">Högtid</option>
+                    <option value = "sommar">Sommar</option>
+                    <option value = "populärkultur">Populärkultur</option>
+                
+                </select>                     
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            </form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Hl_Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hl_Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hl_Genre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hl_Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hl_Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hl_Genre)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

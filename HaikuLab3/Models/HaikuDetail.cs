@@ -6,8 +6,6 @@
 
 
 
-        //public int Ha_Id { get; set; }
-
         public string Ha_Title { get; set; }
 
         public string Ha_Content { get; set; }
