@@ -44,9 +44,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Tillbaka till startsidan</a>
+    @Html.ActionLink("Tillbaka till startsidan", "Index", "Home", null, null)
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+

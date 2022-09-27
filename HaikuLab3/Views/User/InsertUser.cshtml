@@ -10,5 +10,5 @@
 <p>Ett eventuellt felmeddelande: @ViewBag.error</p>
 
 <div>
-    <a asp-action="Index">Tillbaka till start</a>
+    @Html.ActionLink("Tillbaka till startsidan", "Index", "Home", null, null)
 </div>

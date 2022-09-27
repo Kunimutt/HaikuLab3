@@ -6,10 +6,6 @@ namespace HaikuLab3.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult InsertUser()
         {
@@ -63,7 +59,7 @@ namespace HaikuLab3.Controllers
             string jsonstring = HttpContext.Session.GetString("testSession");
             if (jsonstring == null)
             {
-                return View("Index");
+                return RedirectToAction("Index", "Home");
             }
             uu = JsonConvert.DeserializeObject<UserDetail>(jsonstring);
             ViewBag.jsonstring = jsonstring;
