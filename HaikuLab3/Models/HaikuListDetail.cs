@@ -1,8 +1,8 @@
 ﻿namespace HaikuLab3.Models
 {
-    public class HaikuList
+    public class HaikuListDetail
     {
-        public HaikuList() { }
+        public HaikuListDetail() { }
 
         public string Hl_Title { get; set; }
 

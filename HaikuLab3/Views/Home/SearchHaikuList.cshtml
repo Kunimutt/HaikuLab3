@@ -1,0 +1,43 @@
+﻿@model HaikuLab3.Models.ViewModelHaikuList
+
+@{
+    ViewData["Title"] = "SearchHaikuList";
+}
+
+<h1>Visa alla Haiku</h1>
+
+
+<div class="row">
+    <div class= "form-group col-md-4">
+        <form asp-action= "SearchHaikuList">
+            <div class= "form-group">
+                <input type="text" id="search" name="search"/>
+                <input type = "submit" value ="Sök" class ="btn-default" />
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<p>Din sökning @ViewData["SearchHaiku"]</p>
+
+<h2>Lista med haikus</h2>
+
+<table class = "table">
+    <tr>
+        <th>Titel</th>
+        <th>Författare</th>
+        <th>Genre</th>
+    </tr>
+
+    @foreach (HaikuLab3.Models.HaikuListDetail HaikuListDetail in Model.HaikuListDetailList)
+    {
+        <tr>
+            <td>@HaikuListDetail.Hl_Title</td>
+            <td>@HaikuListDetail.Hl_Author</td>
+            <td>@HaikuListDetail.Hl_Genre</td>
+        </tr>
+    }
+
+</table>
+

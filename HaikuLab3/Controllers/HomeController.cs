@@ -18,6 +18,10 @@ namespace HaikuLab3.Controllers
             return View();
         }
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -27,7 +31,7 @@ namespace HaikuLab3.Controllers
 
         public IActionResult ShowAllHaiku()
         {
-            List<HaikuList> Haikulist = new List<HaikuList>();
+            List<HaikuListDetail> Haikulist = new List<HaikuListDetail>();
             HaikuListMethods hm = new HaikuListMethods();
             string error = "";
             Haikulist = hm.SelectHaikuList(out error);
@@ -36,19 +40,98 @@ namespace HaikuLab3.Controllers
         }
 
         [HttpGet]
-        public IActionResult FilterHaiku()
-        { return View(); 
+        public IActionResult FilterHaikuList()
+        {
+            HaikuListMethods hlm = new HaikuListMethods();
+            GenreMethods gm = new GenreMethods();
+            ViewModelHaikuList vmhl = new ViewModelHaikuList
+            {
+                HaikuListDetailList = hlm.SelectHaikuList(out string errormsg),
+                GenreDetailList = gm.SelectGenreList(out string errormsg2),
+            };
+
+            ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
+            return View(vmhl);
+                        
+            }
+
+        [HttpPost]
+        public IActionResult FilterHaikuList(string Ge_Name)
+        {
+            //string filter = Convert.ToString(Ge_Name);
+            HaikuListMethods hlm = new HaikuListMethods();
+            GenreMethods gm = new GenreMethods();
+            ViewModelHaikuList vmhl = new ViewModelHaikuList
+            {
+                HaikuListDetailList = hlm.SelectHaikuList(out string errormsg, Ge_Name),
+                GenreDetailList = gm.SelectGenreList(out string errormsg2)
+            };
+
+            
+            ViewData["TestViewData"] = Ge_Name;
+            ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
+            return View(vmhl);
+            
+        }
+
+        [HttpGet]
+        public IActionResult SearchHaikuList()
+        {
+            HaikuListMethods hlm = new HaikuListMethods();
+            ViewModelHaikuList vmhl = new ViewModelHaikuList
+            {
+                HaikuListDetailList = hlm.SelectHaikuList(out string errormsg)
+            };
+
+            ViewBag.error = "1: " + errormsg;
+            return View(vmhl);
+
         }
 
         [HttpPost]
-        public IActionResult FilterHaiku(HaikuList haikuList)
+        public IActionResult SearchHaikuList(string search)
         {
-            List<HaikuList> Haikulist = new List<HaikuList>();
-            HaikuListMethods hm = new HaikuListMethods();
-            string error = "";
-            Haikulist = hm.FilterHaikuList(haikuList, out error);
-            ViewBag.error = error;
-            return View(Haikulist);
+            HaikuListMethods hlm = new HaikuListMethods();
+            ViewModelHaikuList vmhl = new ViewModelHaikuList
+            {
+                HaikuListDetailList = hlm.SearchHaikuList(out string errormsg, search)
+            };
+
+            ViewData["SearchHaiku"] = search;
+            ViewBag.error = "1: " + errormsg;
+            return View(vmhl);
+
         }
+
+        [HttpGet]
+        public IActionResult SortHaikuList()
+        {
+            HaikuListMethods hlm = new HaikuListMethods();
+            ViewModelHaikuList vmhl = new ViewModelHaikuList
+            {
+                HaikuListDetailList = hlm.SelectHaikuList(out string errormsg)
+            };
+
+            ViewBag.error = "1: " + errormsg;
+            return View(vmhl);
+
+        }
+
+        [HttpPost]
+        public IActionResult SortHaikuList(string sort)
+        {
+            HaikuListMethods hlm = new HaikuListMethods();
+            ViewModelHaikuList vmhl = new ViewModelHaikuList
+            {
+                HaikuListDetailList = hlm.SortHaikuList(out string errormsg, sort)
+            };
+
+            ViewData["SortHaiku"] = sort;
+            ViewBag.error = "1: " + errormsg;
+            return View(vmhl);
+
+        }
+
+
     }
 }
