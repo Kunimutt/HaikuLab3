@@ -54,7 +54,7 @@ namespace HaikuLab3.Models
             }
         }
 
-        public int UpdateUser(UserDetail user, out string errormsg)
+        public int UpdateUser(string alias, string email, out string error)
         {
             // Skapa SQL-connection
             SqlConnection dbConnection = new SqlConnection();
@@ -63,14 +63,15 @@ namespace HaikuLab3.Models
             dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; // <- gå in på properties på databasen, under connection string
 
             // SQL-sträng
-            String insertSQL = "UPDATE [Tbl_User] SET [Us_Email] = 'test@amail.com' WHERE [Us_Alias] = @alias";
+            String insertSQL = "UPDATE [Tbl_User] SET [Us_Email] = @email WHERE [Us_Alias] = @alias";
 
             // Lägg till en user
             SqlCommand dbCommand = new SqlCommand(insertSQL, dbConnection);
 
             
-            dbCommand.Parameters.Add("alias", SqlDbType.NVarChar, 30).Value = user.Us_Alias;
-           
+            dbCommand.Parameters.Add("alias", SqlDbType.NVarChar, 30).Value = alias;
+            dbCommand.Parameters.Add("email", SqlDbType.NVarChar, 30).Value = email;
+
 
             // Exekvera SQL-strängen
             try
@@ -78,13 +79,51 @@ namespace HaikuLab3.Models
                 dbConnection.Open();
                 int i = 0;
                 i = dbCommand.ExecuteNonQuery();
-                if (i == 1) { errormsg = ""; }
-                else { errormsg = "Det uppdaterades inte i databasen."; }
+                if (i == 1) { error = ""; }
+                else { error = "Det uppdaterades inte i databasen."; }
                 return (i);
             }
             catch (Exception e)
             {
-                errormsg = e.Message;
+                error = e.Message;
+                return 0;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+        }
+        public int DeleteUser(string alias, out string error)
+        {
+            // Skapa SQL-connection
+            SqlConnection dbConnection = new SqlConnection();
+
+            // Koppling mot SQL Server
+            dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; // <- gå in på properties på databasen, under connection string
+
+            // SQL-sträng
+            String deleteSQL = "DELETE FROM [Tbl_User] WHERE [Us_Alias] = @alias";
+
+            // Lägg till en user
+            SqlCommand dbCommand = new SqlCommand(deleteSQL, dbConnection);
+
+
+            dbCommand.Parameters.Add("alias", SqlDbType.NVarChar, 30).Value = alias;
+            
+
+            // Exekvera SQL-strängen
+            try
+            {
+                dbConnection.Open();
+                int i = 0;
+                i = dbCommand.ExecuteNonQuery();
+                if (i == 1) { error = ""; }
+                else { error = "Det uppdaterades inte i databasen."; }
+                return (i);
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
                 return 0;
             }
             finally

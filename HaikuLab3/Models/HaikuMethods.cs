@@ -17,14 +17,14 @@ namespace HaikuLab3.Models
             dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; // <- gå in på properties på databasen, under connection string
 
             // SQL-sträng
-            String insertSQL = "INSERT INTO [Tbl_Haiku]  ([Ha_Author], [Ha_Genre], [Ha_Title], [Ha_Content], [Ha_Date]) SELECT [Us_Id], [Ge_Id], @title, @content, GETDATE() FROM [Tbl_User], [Tbl_Genre] WHERE [Us_Alias] = 'grsgwgasgs' AND [Ge_Name] = @genre";
+            String insertSQL = "INSERT INTO [Tbl_Haiku]  ([Ha_Author], [Ha_Genre], [Ha_Title], [Ha_Content], [Ha_Date]) SELECT [Us_Id], [Ge_Id], @title, @content, GETDATE() FROM [Tbl_User], [Tbl_Genre] WHERE [Us_Alias] = @author AND [Ge_Name] = @genre";
 
             // Lägg till en user
             SqlCommand dbCommand = new SqlCommand(insertSQL, dbConnection);
 
             dbCommand.Parameters.Add("title", SqlDbType.NVarChar, 70).Value = haiku.Ha_Title;
             dbCommand.Parameters.Add("content", SqlDbType.NVarChar, 70).Value = haiku.Ha_Content;
-            //dbCommand.Parameters.Add("author", SqlDbType.NVarChar, 30).Value = haiku.Ha_Alias;
+            dbCommand.Parameters.Add("author", SqlDbType.NVarChar, 30).Value = haiku.Ha_Alias;
             dbCommand.Parameters.Add("genre", SqlDbType.NVarChar, 70).Value = haiku.Ha_Genre;
             //dbCommand.Parameters.Add("photo", SqlDbType.Image).Value = haiku.Ha_Photo;
 
@@ -50,7 +50,7 @@ namespace HaikuLab3.Models
             }
         }
 
-        public int UpdateUser(UserDetail user, out string errormsg)
+        public int UpdateUser7(UserDetail user, out string errormsg)
         {
             // Skapa SQL-connection
             SqlConnection dbConnection = new SqlConnection();

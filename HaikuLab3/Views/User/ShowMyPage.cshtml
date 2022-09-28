@@ -1,63 +1,68 @@
 ﻿@model HaikuLab3.Models.ViewModelUserHaiku
 
-
-
-@{ 
-    ViewData["Title"] = "Min sida";
+@{
+    ViewData["Title"] = "ShowMyPage";
 }
 
-<p>Välkommen: @TempData["Test"]</p>
 
+<h1>Min sida</h1>
 
-@*
+<h4>Hej @TempData["Test"]!</h4>
+
 <div>
-    <h4>UserDetail</h4>
+    <h5>Mina uppgifter</h5>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        @foreach(HaikuLab3.Models.UserDetail UserDetail in Model.UserDetailList)
+        {
+            <dt class = "col-sm-2">
             Förnamn
         </dt>
         <dd class = "col-sm-10">
             @UserDetail.Us_Fname
         </dd>
-        <dt class = "col-sm-2">
+          <dt class = "col-sm-2">
             Efternamn
         </dt>
         <dd class = "col-sm-10">
             @UserDetail.Us_Lname
         </dd>
-        <dt class = "col-sm-2">
+          <dt class = "col-sm-2">
             Alias
         </dt>
         <dd class = "col-sm-10">
             @UserDetail.Us_Alias
         </dd>
-        <dt class = "col-sm-2">
+          <dt class = "col-sm-2">
             Födelseår
         </dt>
         <dd class = "col-sm-10">
             @UserDetail.Us_Age
         </dd>
-        <dt class = "col-sm-2">
+          <dt class = "col-sm-2">
             Email
         </dt>
         <dd class = "col-sm-10">
             @UserDetail.Us_Email
         </dd>
-    </dl>
-</div>*@
+               }
 
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+     </dl>
 </div>
 
-<h2>Lista med mina haikus</h2>
+        
+      
+ 
+<div>
+    @Html.ActionLink("Edit email", "EditEmail", "User" /*new {id = Model.UserDetailList}*/) |
+    @Html.ActionLink("Delete user", "DeleteUser", "User")
+    
+</div>
 
+<h5>Mina haikus</h5>
 <table class = "table">
     <tr>
         <th>Titel</th>
-        <th>Författare</th>
         <th>Genre</th>
     </tr>
 
@@ -65,7 +70,6 @@
     {
         <tr>
             <td>@HaikuListDetail.Hl_Title</td>
-            <td>@HaikuListDetail.Hl_Author</td>
             <td>@HaikuListDetail.Hl_Genre</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -76,4 +80,3 @@
     }
 
 </table>
-
