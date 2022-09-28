@@ -53,7 +53,7 @@ namespace HaikuLab3.Controllers
         }
 
         [HttpGet]
-        public IActionResult TestSessionVar(UserDetail ud)
+        public IActionResult TestSessionVar(string alias)
         {
             UserDetail uu = new UserDetail();
             string jsonstring = HttpContext.Session.GetString("testSession");
@@ -65,13 +65,13 @@ namespace HaikuLab3.Controllers
             ViewBag.jsonstring = jsonstring;
 
             UserMethods um = new UserMethods();
-            int i = 0;
+            
             string error = "";
 
-            i = um.UpdateUser(uu, out error);
+            um.SelectUserList(out error, alias);
 
             ViewBag.error = error;
-            ViewBag.antal = i;
+            
             TempData["Test"] = uu.Us_Alias; 
 
 
@@ -79,6 +79,32 @@ namespace HaikuLab3.Controllers
             
         }
 
-        
+        //[HttpGet]
+        //public IActionResult ShowMyPage(UserDetail user)
+        //{
+        //    UserDetail uu = new UserDetail();
+        //    string jsonstring = HttpContext.Session.GetString("testSession");
+        //    if (jsonstring == null)
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    uu = JsonConvert.DeserializeObject<UserDetail>(jsonstring);
+        //    string alias = uu.Us_Alias;
+        //    ViewBag.jsonstring = jsonstring;
+
+        //    HaikuListMethods hlm = new HaikuListMethods();
+        //    UserMethods um = new UserMethods();
+        //    ViewModelUserHaiku vmuh = new ViewModelUserHaiku
+        //    {
+        //        HaikuListDetailList = hlm.SelectHaikuListForUser(out string errormsg, alias),
+        //        UserDetailList = um.SelectUserList(out string errormsg2, alias)
+        //    };
+        //    TempData["Test"] = uu.Us_Alias;
+        //    ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
+        //    return View(vmuh);
+
+        //}
+
+
     }
 }

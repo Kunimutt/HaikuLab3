@@ -92,5 +92,59 @@ namespace HaikuLab3.Models
                 dbConnection.Close();
             }
         }
+
+        public List<UserDetail> SelectUserList(out string errormsg, string alias)
+        {
+            // Skapa SQL-connection
+            SqlConnection dbConnection = new SqlConnection();
+
+            // Koppling mot SQL Server
+            dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; // <- gå in på properties på databasen, under connection string
+
+            // SQL-sträng
+            String selectSQL = "SELECT * FROM myPage WHERE Us_Alias = @alias;";
+
+            // Lägg till en user
+            SqlCommand dbCommand = new SqlCommand(selectSQL, dbConnection);
+            dbCommand.Parameters.Add("alias", SqlDbType.NVarChar, 30).Value = alias;
+            
+            SqlDataReader reader = null;
+
+            List<UserDetail> Userlist = new List<UserDetail>();
+            errormsg = "";
+
+            // Exekvera SQL-strängen
+            try
+            {
+                dbConnection.Open();
+                reader = dbCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    UserDetail UserDetail = new UserDetail();
+                    UserDetail.Us_Fname = reader["Us_Fname"].ToString();
+                    UserDetail.Us_Lname = reader["Us_Lname"].ToString();
+                    UserDetail.Us_Alias = reader["Us_Alias"].ToString();
+                    UserDetail.Us_Age = Convert.ToInt16(reader["Us_Age"]);
+                    UserDetail.Us_Email = reader["Us_Email"].ToString();
+
+
+                    Userlist.Add(UserDetail);
+
+                }
+                reader.Close();
+                return Userlist;
+
+            }
+            catch (Exception e)
+            {
+                errormsg = e.Message;
+                return null;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+        }
+
     }
 }

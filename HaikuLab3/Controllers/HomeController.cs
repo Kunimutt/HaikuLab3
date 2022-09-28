@@ -15,13 +15,14 @@ namespace HaikuLab3.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<TopHaikuDetail> TopHaikuList = new List<TopHaikuDetail>();
+            TopHaikuMethods thm = new TopHaikuMethods();
+            string error = "";
+            TopHaikuList = thm.SelectTopHaikuList(out error);
+            ViewBag.error = error;
+            return View(TopHaikuList);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -102,36 +103,6 @@ namespace HaikuLab3.Controllers
             return View(vmhl);
 
         }
-
-        [HttpGet]
-        public IActionResult SortHaikuList()
-        {
-            HaikuListMethods hlm = new HaikuListMethods();
-            ViewModelHaikuList vmhl = new ViewModelHaikuList
-            {
-                HaikuListDetailList = hlm.SelectHaikuList(out string errormsg)
-            };
-
-            ViewBag.error = "1: " + errormsg;
-            return View(vmhl);
-
-        }
-
-        [HttpPost]
-        public IActionResult SortHaikuList(string sort)
-        {
-            HaikuListMethods hlm = new HaikuListMethods();
-            ViewModelHaikuList vmhl = new ViewModelHaikuList
-            {
-                HaikuListDetailList = hlm.SortHaikuList(out string errormsg, sort)
-            };
-
-            ViewData["SortHaiku"] = sort;
-            ViewBag.error = "1: " + errormsg;
-            return View(vmhl);
-
-        }
-
 
     }
 }

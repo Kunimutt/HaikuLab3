@@ -23,3 +23,30 @@
     For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
     and restarting the app.
 </p>
+
+@*[HttpGet]
+        public IActionResult TestSessionVar(string alias)
+        {
+            UserDetail uu = new UserDetail();
+            string jsonstring = HttpContext.Session.GetString("testSession");
+            if (jsonstring == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            uu = JsonConvert.DeserializeObject<UserDetail>(jsonstring);
+            ViewBag.jsonstring = jsonstring;
+
+            UserMethods um = new UserMethods();
+            
+            string error = "";
+
+            um.SelectUserList(out error, alias);
+
+            ViewBag.error = error;
+            
+            TempData["Test"] = uu.Us_Alias; 
+
+
+            return View(uu);
+            
+        }*@
