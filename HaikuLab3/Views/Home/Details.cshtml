@@ -1,0 +1,60 @@
+﻿@model HaikuLab3.Models.HaikuDetail
+
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<h1>Visa haiku</h1>
+<h5>@ViewData["detailtest"]</h5>
+
+
+
+<div>
+
+<hr />
+<dl class="row">
+     <dt class="col-sm-2">
+            Titel
+           
+    </dt    >
+        <dd class="col-sm-10">
+            @Model.Ha_Title
+    </dd    >
+        <dt class="col-sm-2">
+            Text
+
+
+
+       </dt>
+        <dd class="col-sm-10">
+            @Model.Ha_Content
+        </dd>
+        <dt class="col-sm-2">
+            Författare
+
+
+
+       </dt>
+        <dd class="col-sm-10">
+            @Model.Ha_Alias
+        </dd>
+        <dt class="col-sm-2">
+            Genre
+
+
+
+       </dt>
+        <dd class="col-sm-10">
+            @Model.Ha_Genre
+        </dd>
+    
+</dl>
+</div>
+
+<div> 
+    <a asp-action="Index">Till startsidan</a>
+</div>

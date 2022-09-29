@@ -4,9 +4,7 @@
     ViewData["Title"] = "InsertHaikuForm";
 }
 
-<h1>InsertHaikuForm</h1>
-
-<h4>HaikuDetail</h4>
+<h1>Skapa en haiku</h1>
 
 <h5>Hej @TempData["Test"]!</h5>
 <hr />
@@ -15,12 +13,12 @@
         <form asp-action="InsertHaikuForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Ha_Title" class="control-label"></label>
+                <label asp-for="Ha_Title" class="control-label">Titel</label>
                 <input asp-for="Ha_Title" class="form-control" />
                 <span asp-validation-for="Ha_Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ha_Content" class="control-label"></label>
+                <label asp-for="Ha_Content" class="control-label">Skriv din haiku här</label>
                 <input asp-for="Ha_Content" class="form-control" />
                 <span asp-validation-for="Ha_Content" class="text-danger"></span>
             </div>
@@ -32,7 +30,7 @@
             </div>-->
             
             <div class="form-group">
-                <label asp-for="Ha_Genre"> Välj en genre</label>
+                <label asp-for="Ha_Genre">Välj en genre</label>
                 <select id= "Ha_Genre" name ="Ha_Genre">
                     <option value = "drama">Drama</option>
                     <option value = "skräck">Skräck</option>
@@ -49,9 +47,11 @@
             <div>
                 <input type="hidden" id="Ha_Alias" name="Ha_Alias" value="@TempData["Test"]"/>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Skapa" class="btn btn-primary" />
             </div>
+            <br />
         </form>
     </div>
 </div>

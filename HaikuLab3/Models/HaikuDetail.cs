@@ -1,13 +1,15 @@
-﻿namespace HaikuLab3.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HaikuLab3.Models
 {
     public class HaikuDetail
     {
         public HaikuDetail() { }
 
 
-
+        [Required(ErrorMessage = "Unik titel krävs")]
         public string Ha_Title { get; set; }
-
+        [Required(ErrorMessage = "Haikutext")]
         public string Ha_Content { get; set; }
 
         public string Ha_Alias { get; set; }

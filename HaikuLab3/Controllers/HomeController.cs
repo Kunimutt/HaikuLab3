@@ -104,5 +104,25 @@ namespace HaikuLab3.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult Details(string id)
+        {
+            //List<HaikuDetail> Haikuex = new List<HaikuDetail>();
+            HaikuDetail Haikuex = new HaikuDetail();
+            HaikuMethods hm = new HaikuMethods();
+            //string id2 Request.QueryString["id"];
+            Haikuex = hm.SelectHaiku(out string errormsg, id);
+
+
+            ViewBag.error = "1: " + errormsg;
+            ViewData["detailtest"] = id;
+
+
+
+            return View(Haikuex);
+
+
+        }
+
     }
 }

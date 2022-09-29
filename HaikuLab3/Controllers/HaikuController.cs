@@ -34,28 +34,32 @@ namespace HaikuLab3.Controllers
         [HttpPost]
         public IActionResult InsertHaikuForm(HaikuDetail hd)
         {
-           
 
-            HaikuMethods hm = new HaikuMethods();
-            int i = 0;
-            string error = "";
-
-            i = hm.InsertHaiku(hd, out error);
-
-            ViewBag.error = error;
-            ViewBag.antal = i;
-
-            if (error == "")
+            if (ModelState.IsValid)
             {
-                return View("InsertHaiku");
+                HaikuMethods hm = new HaikuMethods();
+                int i = 0;
+                string error = "";
+
+                i = hm.InsertHaiku(hd, out error);
+
+                ViewBag.error = error;
+                ViewBag.antal = i;
+
+                if (error == "")
+                {
+                    return View("InsertHaiku");
+                }
+                else
+                {
+                    return View("InsertHaikuFail");
+                }
+
             }
-            else
-            {
-                return View("InsertHaikuFail");
-            }
+                
 
 
-            //return View();
+            return View();
         }
     }
 }

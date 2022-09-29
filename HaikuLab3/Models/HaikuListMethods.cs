@@ -164,7 +164,7 @@ namespace HaikuLab3.Models
             dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; // <- gå in på properties på databasen, under connection string
 
             // SQL-sträng
-            String selectSQL = "SELECT * FROM showAll WHERE Ha_Title = @search OR Us_Alias = @search OR Ge_Name = @search";
+            String selectSQL = "SELECT * FROM showAll WHERE Ha_Title LIKE '%' + @search + '%' OR Us_Alias LIKE '%' + @search + '%' OR Ge_Name LIKE '%' + @search + '%'";
 
             // Lägg till en user
             SqlCommand dbCommand = new SqlCommand(selectSQL, dbConnection);

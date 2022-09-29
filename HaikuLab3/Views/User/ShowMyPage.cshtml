@@ -4,7 +4,6 @@
     ViewData["Title"] = "ShowMyPage";
 }
 
-
 <h1>Min sida</h1>
 
 <h4>Hej @TempData["Test"]!</h4>
@@ -50,15 +49,13 @@
      </dl>
 </div>
 
-        
-      
- 
 <div>
-    @Html.ActionLink("Edit email", "EditEmail", "User" /*new {id = Model.UserDetailList}*/) |
-    @Html.ActionLink("Delete user", "DeleteUser", "User")
+    @Html.ActionLink("Ändra email", "EditEmail", "User" /*new {id = Model.UserDetailList}*/) |
+    @Html.ActionLink("Ta bort användare", "DeleteUser", "User")
     
 </div>
-
+<br />
+<br />
 <h5>Mina haikus</h5>
 <table class = "table">
     <tr>
@@ -72,9 +69,7 @@
             <td>@HaikuListDetail.Hl_Title</td>
             <td>@HaikuListDetail.Hl_Genre</td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Visa haiku", "Details", "Home", new { id= HaikuListDetail.Hl_Title })
             </td>
         </tr>
     }

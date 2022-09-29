@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<HaikuLab3.Models.TopHaikuDetail>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Välkommen!</h1>
-    
-</div>
+<br />
+<br />
+<h1 class="display-4">Välkommen!</h1>
+<br />
+<br />
+<br />
 
 <h4>Topplista över våra mest flitiga Haiku-poeter!</h4>
 
@@ -32,12 +34,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Th_Count)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+            
         </tr>
 }
     </tbody>
 </table>
+<br />
+
+<div>
+    @Html.ActionLink("Logga in", "LogInUser", "User")
+
+</div>
+
+

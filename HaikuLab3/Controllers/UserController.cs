@@ -25,37 +25,64 @@ namespace HaikuLab3.Controllers
             return View();
         }
 
-        
+
 
         //TEST AV SESSIONSVARIABEL SOM SPARAR ALIAS
         [HttpPost]
         public IActionResult InsertUserForm(UserDetail ud)
         {
-
-            UserMethods um = new UserMethods();
-            int i = 0;
-            string error = "";
-            string alias = ud.Us_Alias;
-
-            i = um.InsertUser(ud, out error);
-
-            ViewBag.error = error;
-            ViewBag.antal = i;
-
-            if (error == "")
+            if (ModelState.IsValid)
             {
-                string u = JsonConvert.SerializeObject(alias);
-                HttpContext.Session.SetString("testSession", u);
-                return View("InsertUser");
+                UserMethods um = new UserMethods();
+                int i = 0;
+                string error = "";
+                string alias = ud.Us_Alias;
+
+                i = um.InsertUser(ud, out error);
+
+                ViewBag.error = error;
+                ViewBag.antal = i;
+
+                if (error == "")
+                {
+                    string u = JsonConvert.SerializeObject(alias);
+                    HttpContext.Session.SetString("testSession", u);
+                    return View("InsertUser");
+                }
+                else
+                {
+                    return View("InsertUserFail");
+                }
+
+
             }
-            else
-            {
-                return View("InsertUserFail");
-            }
-
-
-
+            return View();
         }
+
+        //    UserMethods um = new UserMethods();
+        //    int i = 0;
+        //    string error = "";
+        //    string alias = ud.Us_Alias;
+
+        //    i = um.InsertUser(ud, out error);
+
+        //    ViewBag.error = error;
+        //    ViewBag.antal = i;
+
+        //    if (error == "")
+        //    {
+        //        string u = JsonConvert.SerializeObject(alias);
+        //        HttpContext.Session.SetString("testSession", u);
+        //        return View("InsertUser");
+        //    }
+        //    else
+        //    {
+        //        return View("InsertUserFail");
+        //    }
+
+
+
+        //}
 
         [HttpGet]
         public IActionResult TestSessionVar(string alias)
@@ -206,6 +233,52 @@ namespace HaikuLab3.Controllers
         }
 
         public IActionResult DeleteUserFail()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult LogInUser()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public IActionResult LogInUser(string alias, string email)
+        {
+            UserMethods um = new UserMethods();
+            int i = 0;
+            string error = "";
+            //string alias = ud.Us_Alias;
+
+            i = um.LogInUser(alias, email, out error);
+
+            ViewBag.error = error;
+            ViewBag.antal = i;
+
+
+
+            if (error == "")
+            {
+                string u = JsonConvert.SerializeObject(alias);
+                HttpContext.Session.SetString("testSession", u);
+                return View("LogInUserSuccess");
+            }
+            else
+            {
+                return View("LogInUserFail");
+            }
+
+        }
+
+        public IActionResult LogInUserSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult LogInUserFail()
         {
             return View();
         }

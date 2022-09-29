@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "LogInUser";
+}
+
+<h4>Logga in för att se din sida och lägga till fler haikus</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LogInUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            
+            <div class="form-group">
+                <label for="alias">Ange ditt användarnamn</label><br />
+                <input type="text" id="alias" name="alias" />
+                
+            </div>
+           
+            <div class="form-group">
+                 <label for="email">Ange din mailadress</label><br />
+                 <input type="text" id="email" name="email" />
+                
+            </div>
+            <br />
+            <div class="form-group">
+            <input type="submit" value="Logga in" class="btn-default" />
+            </div>
+        </form>
+    </div>
+</div>

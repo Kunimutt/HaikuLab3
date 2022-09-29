@@ -36,9 +36,11 @@
                 <input asp-for="Us_Email" class="form-control" />
                 <span asp-validation-for="Us_Email" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Skapa" class="btn btn-primary" />
+                <input type="submit" value="Skapa" validation="ModelOnly" class="btn btn-primary" />
             </div>
+            <br />
         </form>
     </div>
 </div>

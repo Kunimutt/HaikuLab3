@@ -88,5 +88,67 @@ namespace HaikuLab3.Models
                 dbConnection.Close();
             }
         }
+        public HaikuDetail SelectHaiku(out string errormsg, string id)
+        {
+            // Skapa SQL-connection
+            SqlConnection dbConnection = new SqlConnection();
+
+
+
+            // Koppling mot SQL Server
+            dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True"; // <- gå in på properties på databasen, under connection string
+
+
+
+            // SQL-sträng
+            String selectSQL = "SELECT * FROM showHaiku WHERE Ha_Title = @id";
+
+
+
+            // Lägg till en user
+            SqlCommand dbCommand = new SqlCommand(selectSQL, dbConnection);
+            dbCommand.Parameters.Add("id", SqlDbType.NVarChar, 30).Value = id;
+
+
+
+            SqlDataReader reader = null;
+
+
+
+            HaikuDetail Haikudetalj = new HaikuDetail();
+            errormsg = "";
+
+
+
+            // Exekvera SQL-strängen
+            try
+            {
+                dbConnection.Open();
+                reader = dbCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    HaikuDetail Haiku = new HaikuDetail();
+                    Haiku.Ha_Title = reader["Ha_Title"].ToString();
+                    Haiku.Ha_Content = reader["Ha_Content"].ToString();
+                    Haiku.Ha_Alias = reader["Us_Alias"].ToString();
+                    Haiku.Ha_Genre = reader["Ge_Name"].ToString();
+
+                    Haikudetalj = Haiku;
+
+                }
+                reader.Close();
+                return Haikudetalj;
+
+            }
+            catch (Exception e)
+            {
+                errormsg = e.Message;
+                return null;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+        }
     }
 }
