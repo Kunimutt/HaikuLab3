@@ -4,16 +4,16 @@ using System.Diagnostics;
 
 namespace HaikuLab3.Controllers
 {
-    public class HomeController : Controller
+    public class StartController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<StartController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public StartController(ILogger<StartController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Home()
         {
             List<TopHaikuDetail> TopHaikuList = new List<TopHaikuDetail>();
             TopHaikuMethods thm = new TopHaikuMethods();

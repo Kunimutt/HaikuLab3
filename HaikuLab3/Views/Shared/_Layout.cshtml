@@ -4,9 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HaikuLab3</title>
+    @RenderSection("MetaTags", required: false)
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HaikuLab3.styles.css" asp-append-version="true" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-
+FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -20,7 +23,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Start" asp-action="Home">Start</a>
                         </li>
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="InsertUserForm">Skapa användare</a>
@@ -32,10 +35,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Haiku" asp-action="InsertHaikuForm">Lägg till haiku</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="FilterHaikuList">Visa alla - Filter</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Start" asp-action="FilterHaikuList">Visa alla - Filter</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SearchHaikuList">Visa alla - Sök</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Start" asp-action="SearchHaikuList">Visa alla - Sök</a>
                         </li>
                         
                     </ul>

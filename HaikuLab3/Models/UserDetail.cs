@@ -26,7 +26,7 @@ namespace HaikuLab3.Models
 
         [Required(ErrorMessage = "Födelseår krävs.")]
         [Range(1910,2014, ErrorMessage = "Ange ett giltigt födelseår. Du måste vara minst 8 år för att kunna skapa en användare.")]
-        public int Us_Age { get; set; }
+        public int? Us_Age { get; set; }
 
         [Required(ErrorMessage = "Email krävs.")]
         public string Us_Email { get; set; }

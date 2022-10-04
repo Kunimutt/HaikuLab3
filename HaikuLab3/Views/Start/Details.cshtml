@@ -6,8 +6,23 @@
     ViewData["Title"] = "Details";
 }
 
+@section MetaTags
+{
+    <meta name = "description" content = "Haiku 2.0 är ett community för alla som älskar Haikus. Här kan du skriva egna haikus men också läsa och betygsätta andras" />
+    <meta name = "title" content = "@Model.Ha_Title"/>
+    <meta name = "language" content = "sv"/>
+    <meta name = "type" content = "website"/>
+    <meta name = "keywords" content = "Haiku,@Model.Ha_Alias,@Model.Ha_Genre,dikter"/>
+    <meta name = "creator" content = "@Model.Ha_Alias"/>
+    <meta name = "publisher" content = "M. Haldorson, B. Salminen"/>
 
 
+}
+@*<head>
+    <meta property = "og:type" content = "website" />
+</head>*@
+
+<body>
 <h1>Visa haiku</h1>
 <h5>@ViewData["detailtest"]</h5>
 
@@ -55,6 +70,9 @@
 </dl>
 </div>
 
+
 <div> 
-    <a asp-action="Index">Till startsidan</a>
+    <a asp-action="Home">Till startsidan</a>
 </div>
+
+</body>
