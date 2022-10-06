@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HaikuLab3.Models.TopHaikuDetail>
+﻿@model HaikuLab3.Models.ViewModelToplist
 
 @{
     ViewData["Title"] = "Home";
@@ -16,6 +16,9 @@
 <table class="table">
     <thead>
         <tr>
+             <th>
+                
+            </th>
             <th>
                 Författare
             </th>
@@ -26,13 +29,16 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (HaikuLab3.Models.TopHaikuDetail TopHaikuDetail in Model.TopHaikuDetailList) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Th_Author)
+                @Html.DisplayFor(modelItem => TopHaikuDetail.Th_Row)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Th_Count)
+                @Html.DisplayFor(modelItem => TopHaikuDetail.Th_Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => TopHaikuDetail.Th_Count)
             </td>
             
         </tr>
@@ -40,6 +46,46 @@
     </tbody>
 </table>
 <br />
+<br />
+<br />
+
+<h4>Topplista över våra mest uppskattade haikus!</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+             <th>
+                
+            </th>
+            <th>
+                Titel
+            </th>
+            <th>
+                Betyg
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (HaikuLab3.Models.TopRatingDetail TopRatingDetail in Model.TopRatingDetailList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Row)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Average)
+            </td>
+            <td>
+                @Html.ActionLink("Visa haiku", "Details", new { id= TopRatingDetail.Tr_Title })
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
 
 <div>
     @Html.ActionLink("Logga in", "LogInUser", "User")

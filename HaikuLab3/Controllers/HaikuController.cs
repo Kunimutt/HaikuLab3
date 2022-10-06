@@ -43,6 +43,7 @@ namespace HaikuLab3.Controllers
 
                 i = hm.InsertHaiku(hd, out error);
 
+
                 ViewBag.error = error;
                 ViewBag.antal = i;
 
@@ -50,7 +51,7 @@ namespace HaikuLab3.Controllers
                 {
                     return View("InsertHaiku");
                 }
-                else
+                else 
                 {
                     return View("InsertHaikuFail");
                 }

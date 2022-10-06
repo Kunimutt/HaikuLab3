@@ -1,4 +1,4 @@
-﻿@model HaikuLab3.Models.HaikuDetail
+﻿@model HaikuLab3.Models.ViewModelHaikuRating
 
 
 
@@ -6,16 +6,19 @@
     ViewData["Title"] = "Details";
 }
 
+@foreach(HaikuLab3.Models.HaikuDetail HaikuDetail in Model.HaikuDetailList)
+
 @section MetaTags
 {
+    
     <meta name = "description" content = "Haiku 2.0 är ett community för alla som älskar Haikus. Här kan du skriva egna haikus men också läsa och betygsätta andras" />
-    <meta name = "title" content = "@Model.Ha_Title"/>
+    <meta name = "title" content = "@HaikuDetail.Ha_Title"/>
     <meta name = "language" content = "sv"/>
     <meta name = "type" content = "website"/>
-    <meta name = "keywords" content = "Haiku,@Model.Ha_Alias,@Model.Ha_Genre,dikter"/>
-    <meta name = "creator" content = "@Model.Ha_Alias"/>
+    <meta name = "keywords" content = "Haiku,@HaikuDetail.Ha_Alias,@HaikuDetail.Ha_Genre,dikter"/>
+    <meta name = "creator" content = "@HaikuDetail.Ha_Alias"/>
     <meta name = "publisher" content = "M. Haldorson, B. Salminen"/>
-
+ 
 
 }
 @*<head>
@@ -29,24 +32,26 @@
 
 
 <div>
-
 <hr />
+
 <dl class="row">
+
+    @foreach(HaikuLab3.Models.HaikuDetail HaikuDetail in Model.HaikuDetailList)
+    {
+
      <dt class="col-sm-2">
             Titel
            
     </dt    >
         <dd class="col-sm-10">
-            @Model.Ha_Title
+            @HaikuDetail.Ha_Title
     </dd    >
         <dt class="col-sm-2">
             Text
 
-
-
        </dt>
         <dd class="col-sm-10">
-            @Model.Ha_Content
+            @HaikuDetail.Ha_Content
         </dd>
         <dt class="col-sm-2">
             Författare
@@ -55,7 +60,7 @@
 
        </dt>
         <dd class="col-sm-10">
-            @Model.Ha_Alias
+            @HaikuDetail.Ha_Alias
         </dd>
         <dt class="col-sm-2">
             Genre
@@ -64,12 +69,28 @@
 
        </dt>
         <dd class="col-sm-10">
-            @Model.Ha_Genre
+            @HaikuDetail.Ha_Genre
         </dd>
     
+}
+
 </dl>
 </div>
 
+<div>
+    <dl class="row">
+
+        @foreach(HaikuLab3.Models.RatingDetail RatingDetail in Model.RatingDetailList)
+ {
+         <dt class = "col-sm-2">
+            Betyg
+        </dt>
+        <dd class = "col-sm-10">
+            @RatingDetail.Ra_RatingAverage
+        </dd>
+ }
+
+</div>
 
 <div> 
     <a asp-action="Home">Till startsidan</a>

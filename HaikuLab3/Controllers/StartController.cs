@@ -15,12 +15,24 @@ namespace HaikuLab3.Controllers
 
         public IActionResult Home()
         {
-            List<TopHaikuDetail> TopHaikuList = new List<TopHaikuDetail>();
             TopHaikuMethods thm = new TopHaikuMethods();
-            string error = "";
-            TopHaikuList = thm.SelectTopHaikuList(out error);
-            ViewBag.error = error;
-            return View(TopHaikuList);
+            ViewModelToplist vmtl = new ViewModelToplist
+            {
+                TopHaikuDetailList = thm.SelectTopHaikuList(out string errormsg),
+                TopRatingDetailList = thm.SelectTopRatingList(out string errormsg2)
+            };
+
+
+            ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
+            return View(vmtl);
+
+
+            //List<TopHaikuDetail> TopHaikuList = new List<TopHaikuDetail>();
+            //TopHaikuMethods thm = new TopHaikuMethods();
+            //string error = "";
+            //TopHaikuList = thm.SelectTopHaikuList(out error);
+            //ViewBag.error = error;
+            //return View(TopHaikuList);
         }
 
 
@@ -108,18 +120,27 @@ namespace HaikuLab3.Controllers
         public IActionResult Details(string id)
         {
             //List<HaikuDetail> Haikuex = new List<HaikuDetail>();
-            HaikuDetail Haikuex = new HaikuDetail();
+            //HaikuDetail Haikuex = new HaikuDetail();
             HaikuMethods hm = new HaikuMethods();
+            ViewModelHaikuRating vmhr = new ViewModelHaikuRating
+            {
+                HaikuDetailList = hm.SelectHaiku(out string errormsg, id),
+                RatingDetailList = hm.SelectRating(out string errormsg2, id)
+            };
+
+           
+            ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
+            return View(vmhr);
             //string id2 Request.QueryString["id"];
-            Haikuex = hm.SelectHaiku(out string errormsg, id);
+            //Haikuex = hm.SelectHaiku(out string errormsg, id);
 
 
-            ViewBag.error = "1: " + errormsg;
-            ViewData["detailtest"] = id;
+            //ViewBag.error = "1: " + errormsg;
+            //ViewData["detailtest"] = id;
 
 
 
-            return View(Haikuex);
+            //return View(Haikuex);
 
 
         }
