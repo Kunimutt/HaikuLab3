@@ -32,5 +32,7 @@ namespace HaikuLab3.Models
         public string Us_Email { get; set; }
 
         public string? Us_Description { get; set; }
+
+        public string? Us_Photo { get; set; }
     }
 }

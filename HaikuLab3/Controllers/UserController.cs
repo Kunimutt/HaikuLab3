@@ -19,12 +19,18 @@ namespace HaikuLab3.Controllers
 
         }
 
+       
+        public IActionResult AddPic()
+        {
+            return View();
+        }
+
+
         [HttpGet]
         public IActionResult InsertUserForm()
         {
             return View();
         }
-
 
 
         //TEST AV SESSIONSVARIABEL SOM SPARAR ALIAS
@@ -37,6 +43,7 @@ namespace HaikuLab3.Controllers
                 int i = 0;
                 string error = "";
                 string alias = ud.Us_Alias;
+                //string photo = ud.Us_Photo;
 
                 i = um.InsertUser(ud, out error);
 
