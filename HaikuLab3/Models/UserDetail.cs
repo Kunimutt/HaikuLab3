@@ -30,5 +30,7 @@ namespace HaikuLab3.Models
 
         [Required(ErrorMessage = "Email krävs.")]
         public string Us_Email { get; set; }
+
+        public string? Us_Description { get; set; }
     }
 }

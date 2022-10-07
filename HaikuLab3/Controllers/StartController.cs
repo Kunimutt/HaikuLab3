@@ -1,5 +1,6 @@
 ﻿using HaikuLab3.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace HaikuLab3.Controllers
@@ -27,12 +28,7 @@ namespace HaikuLab3.Controllers
             return View(vmtl);
 
 
-            //List<TopHaikuDetail> TopHaikuList = new List<TopHaikuDetail>();
-            //TopHaikuMethods thm = new TopHaikuMethods();
-            //string error = "";
-            //TopHaikuList = thm.SelectTopHaikuList(out error);
-            //ViewBag.error = error;
-            //return View(TopHaikuList);
+        
         }
 
 
@@ -71,7 +67,6 @@ namespace HaikuLab3.Controllers
         [HttpPost]
         public IActionResult FilterHaikuList(string Ge_Name)
         {
-            //string filter = Convert.ToString(Ge_Name);
             HaikuListMethods hlm = new HaikuListMethods();
             GenreMethods gm = new GenreMethods();
             ViewModelHaikuList vmhl = new ViewModelHaikuList
@@ -118,9 +113,7 @@ namespace HaikuLab3.Controllers
 
         [HttpGet]
         public IActionResult Details(string id)
-        {
-            //List<HaikuDetail> Haikuex = new List<HaikuDetail>();
-            //HaikuDetail Haikuex = new HaikuDetail();
+        {          
             HaikuMethods hm = new HaikuMethods();
             ViewModelHaikuRating vmhr = new ViewModelHaikuRating
             {
@@ -131,19 +124,66 @@ namespace HaikuLab3.Controllers
            
             ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
             return View(vmhr);
-            //string id2 Request.QueryString["id"];
-            //Haikuex = hm.SelectHaiku(out string errormsg, id);
 
+        }
+        [HttpGet]
 
-            //ViewBag.error = "1: " + errormsg;
-            //ViewData["detailtest"] = id;
+        public IActionResult InsertRatingForm(string id)
+        {
+            string jsonstring = HttpContext.Session.GetString("testSession");
+            if (jsonstring == null)
+            {
+                return RedirectToAction("Home");
+            }
+            string alias = JsonConvert.DeserializeObject<string>(jsonstring);
+            
+            ViewBag.jsonstring = jsonstring;
+            TempData["Test"] = alias;
+            TempData["Titel"] = id;
 
-
-
-            //return View(Haikuex);
+            return View();
 
 
         }
+
+        [HttpPost]
+
+        public IActionResult InsertRatingForm(string id, string alias, int rating)
+        {
+            
+            RatingDetail ratingDetail = new RatingDetail();
+            RatingMethods rm = new RatingMethods();
+
+            int i = 0;
+            string error = "";
+
+            i = rm.InsertRating(id, alias, rating, out error);
+
+            ViewBag.error = error;
+            ViewBag.antal = i;
+
+            if (error == "")
+            {
+                return RedirectToAction("InsertRatingSuccess");
+            }
+            else
+            {
+                return View("InsertRatingFail");
+            }
+
+        }
+
+        public IActionResult InsertRatingFail()
+        {
+            return View();
+        }
+
+        public IActionResult InsertRatingSuccess()
+        {
+            return View();
+        }
+
+
 
     }
 }

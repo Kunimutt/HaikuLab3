@@ -4,12 +4,11 @@
     ViewData["Title"] = "ShowMyPage";
 }
 
-<h1>Min sida</h1>
+<h1>@TempData["user"]s användarprofil</h1>
 
-<h4>Hej @TempData["Test"]!</h4>
 
 <div>
-    <h5>Mina uppgifter</h5>
+    <h5>Användaruppgifter</h5>
     <hr />
     <dl class="row">
         @foreach(HaikuLab3.Models.UserDetail UserDetail in Model.UserDetailList)
@@ -20,31 +19,15 @@
         <dd class = "col-sm-10">
             @UserDetail.Us_Fname
         </dd>
-          <dt class = "col-sm-2">
-            Efternamn
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Lname
-        </dd>
+         
           <dt class = "col-sm-2">
             Alias
         </dt>
         <dd class = "col-sm-10">
             @UserDetail.Us_Alias
         </dd>
-          <dt class = "col-sm-2">
-            Födelseår
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Age
-        </dd>
-          <dt class = "col-sm-2">
-            Email
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Email
-        </dd>
-         <dt class = "col-sm-2">
+        <br />
+        <dt class = "col-sm-2">
             Beskrivning
         </dt>
         <dd class = "col-sm-10">
@@ -55,15 +38,10 @@
      </dl>
 </div>
 
-<div>
-    @Html.ActionLink("Ändra email", "EditEmail", "User" /*new {id = Model.UserDetailList}*/) |
-    @Html.ActionLink("Ta bort användare", "DeleteUser", "User") |
-    @Html.ActionLink("Lägg till beskrivning", "AddDescription", "User")
-    
-</div>
+
 <br />
 <br />
-<h5>Mina haikus</h5>
+<h5>Haikus</h5>
 <table class = "table">
     <tr>
         <th>Titel</th>

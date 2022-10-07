@@ -59,67 +59,13 @@ namespace HaikuLab3.Controllers
             return View();
         }
 
-        //    UserMethods um = new UserMethods();
-        //    int i = 0;
-        //    string error = "";
-        //    string alias = ud.Us_Alias;
-
-        //    i = um.InsertUser(ud, out error);
-
-        //    ViewBag.error = error;
-        //    ViewBag.antal = i;
-
-        //    if (error == "")
-        //    {
-        //        string u = JsonConvert.SerializeObject(alias);
-        //        HttpContext.Session.SetString("testSession", u);
-        //        return View("InsertUser");
-        //    }
-        //    else
-        //    {
-        //        return View("InsertUserFail");
-        //    }
-
-
-
-        //}
-
-        [HttpGet]
-        public IActionResult TestSessionVar(string alias)
-        {
-            UserDetail uu = new UserDetail();
-            string jsonstring = HttpContext.Session.GetString("testSession");
-            if (jsonstring == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            uu = JsonConvert.DeserializeObject<UserDetail>(jsonstring);
-            ViewBag.jsonstring = jsonstring;
-
-            UserMethods um = new UserMethods();
-            
-            string error = "";
-
-            um.SelectUserList(out error, alias);
-
-            ViewBag.error = error;
-            
-            TempData["Test"] = uu.Us_Alias; 
-
-
-            return View(uu);
-            
-        }
-
-       
-
         [HttpGet]
         public IActionResult ShowMyPage()
         {
             string jsonstring = HttpContext.Session.GetString("testSession");
             if (jsonstring == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Start");
             }
             string alias = JsonConvert.DeserializeObject<string>(jsonstring);
             //string alias = uu.Us_Alias;
@@ -137,13 +83,14 @@ namespace HaikuLab3.Controllers
             return View(vmuh);
 
         }
+
         [HttpGet]
         public IActionResult EditEmail()
         {
             string jsonstring = HttpContext.Session.GetString("testSession");
             if (jsonstring == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Start");
             }
             string alias = JsonConvert.DeserializeObject<string>(jsonstring);
             //string alias = uu.Us_Alias;
@@ -170,14 +117,14 @@ namespace HaikuLab3.Controllers
             int i = 0;
             string error = "";
 
-            i = um.UpdateUser(alias, email, out error);
+            i = um.UpdateUserEmail(alias, email, out error);
 
             ViewBag.error = error;
             ViewBag.antal = i;
 
             if (error == "")
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ShowMyPage");
             }
             else
             {
@@ -221,7 +168,7 @@ namespace HaikuLab3.Controllers
                 
                 HttpContext.Session.Clear();
                
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Start");
                 
             }
             else
@@ -283,5 +230,72 @@ namespace HaikuLab3.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult ShowProfilePage(string id)
+        {
+            HaikuListMethods hlm = new HaikuListMethods();
+            UserMethods um = new UserMethods();
+            ViewModelUserHaiku vmuh = new ViewModelUserHaiku
+            {
+                HaikuListDetailList = hlm.SelectHaikuListForUser(out string errormsg, id),
+                UserDetailList = um.SelectUserList(out string errormsg2, id)
+            };
+
+            TempData["user"] = id;
+
+            ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
+            return View(vmuh);
+
+        }
+
+        [HttpGet]
+        public IActionResult AddDescription()
+        {
+            string jsonstring = HttpContext.Session.GetString("testSession");
+            if (jsonstring == null)
+            {
+                return RedirectToAction("Home", "Start");
+            }
+            string alias = JsonConvert.DeserializeObject<string>(jsonstring);
+            //string alias = uu.Us_Alias;
+            ViewBag.jsonstring = jsonstring;
+            TempData["Test"] = alias;
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult AddDescription(string description)
+        {
+            string jsonstring = HttpContext.Session.GetString("testSession");
+            if (jsonstring == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            string alias = JsonConvert.DeserializeObject<string>(jsonstring);
+            //string alias = uu.Us_Alias;
+            ViewBag.jsonstring = jsonstring;
+
+
+            UserMethods um = new UserMethods();
+            int i = 0;
+            string error = "";
+
+            i = um.UpdateUserDescription(alias, description, out error);
+
+            ViewBag.error = error;
+            ViewBag.antal = i;
+
+            if (error == "")
+            {
+                return RedirectToAction("ShowMyPage");
+            }
+            else
+            {
+                return View("UpdateViewFail");
+            }
+
+
+        }
     }
 }

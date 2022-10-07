@@ -22,7 +22,7 @@ namespace HaikuLab3.Controllers
             string jsonstring = HttpContext.Session.GetString("testSession");
             if (jsonstring == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Start");
             }
             string alias = JsonConvert.DeserializeObject<string>(jsonstring);
             //string alias = uu.Us_Alias;
