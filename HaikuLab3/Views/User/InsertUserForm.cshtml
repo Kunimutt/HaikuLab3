@@ -41,11 +41,6 @@
                 <input asp-for="Us_Email" pattern = "[A-Za-z0-9._+-]+@@[A-Za-z0-9 -]+\.[A-Za-z]{2,}" title="Vänligen skriv emailformatet enligt följande test@email.com" class="form-control" type ="email" aria-invalid = "false" aria-describedBy="err_5"/>
                 <span asp-validation-for="Us_Email" class="text-danger" id="err_5"></span>
             </div>
-            <div class="form-group">
-                <label for="Us_Photo">Lägg till en profilbild här</label>
-                <input type="file"/>
-
-            </div>
             <br />
             <div class="form-group">
                 <input type="submit" value="Skapa" validation="ModelOnly" class="btn btn-primary"/>

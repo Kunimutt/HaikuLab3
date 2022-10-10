@@ -45,6 +45,7 @@ namespace HaikuLab3.Controllers
 
 
                 ViewBag.error = error;
+                ViewBag.felmedd = "Ett eventuellt felmeddelande: " + error;
                 ViewBag.antal = i;
 
                 if (error == "")
@@ -53,6 +54,7 @@ namespace HaikuLab3.Controllers
                 }
                 else 
                 {
+                    //return RedirectToAction("InsertHaikuForm");
                     return View("InsertHaikuFail");
                 }
 

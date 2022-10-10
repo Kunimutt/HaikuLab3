@@ -1,11 +1,87 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HaikuLab3.Models;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace HaikuLab3.Controllers
 {
     public class UserController : Controller
     {
+
+        private readonly IWebHostEnvironment _hostEnvironment;
+
+        public UserController(IWebHostEnvironment hostEnvironment)
+        {
+            _hostEnvironment = hostEnvironment;
+        }
+
+        public IActionResult AddPic()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddPic(IList<IFormFile> files)
+        {
+            string filename = "";
+
+            foreach (IFormFile source in files)
+            {
+                filename = ContentDispositionHeaderValue.Parse(source.ContentDisposition).FileName.Trim('"');
+
+                filename = this.EnsureCorrectFilename(filename);
+
+                using (FileStream output = System.IO.File.Create(this.GetPathAndFilename(filename)))
+                    await source.CopyToAsync(output);
+            }
+
+            string photo = filename;
+
+            string jsonstring = HttpContext.Session.GetString("testSession");
+
+            string alias = JsonConvert.DeserializeObject<string>(jsonstring);
+
+            UserMethods um = new UserMethods();
+
+            string error = "";
+
+            um.UpdateUserPhoto(alias, photo, out error);
+
+            ViewBag.error = error;
+
+            if (error == "")
+            {
+                return RedirectToAction("ShowMyPage");
+            }
+            else
+            {
+                return View("UpdateViewFail");
+            }
+
+            //return this.View();
+        }
+
+
+
+        private string EnsureCorrectFilename(string filename)
+        {
+            if (filename.Contains("\\"))
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+
+
+
+            return filename;
+        }
+
+
+
+        private string GetPathAndFilename(string filename)
+        {
+
+            return this._hostEnvironment.WebRootPath + "/uploads/" + filename;
+        }
 
         public IActionResult InsertUser()
         {
@@ -18,13 +94,6 @@ namespace HaikuLab3.Controllers
             return View();
 
         }
-
-       
-        public IActionResult AddPic()
-        {
-            return View();
-        }
-
 
         [HttpGet]
         public IActionResult InsertUserForm()
@@ -83,10 +152,11 @@ namespace HaikuLab3.Controllers
             ViewModelUserHaiku vmuh = new ViewModelUserHaiku
             {
                 HaikuListDetailList = hlm.SelectHaikuListForUser(out string errormsg, alias),
-                UserDetailList = um.SelectUserList(out string errormsg2, alias)
+                UserDetailList = um.SelectUserList(out string errormsg2, alias),
+                userDetail = um.SelectUser(out string errormsg3, alias)
             };
             TempData["Test"] = alias;
-            ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
+            ViewBag.error = "1: " + errormsg + "2: " + errormsg2 + "3: " + errormsg3;
             return View(vmuh);
 
         }
@@ -245,12 +315,13 @@ namespace HaikuLab3.Controllers
             ViewModelUserHaiku vmuh = new ViewModelUserHaiku
             {
                 HaikuListDetailList = hlm.SelectHaikuListForUser(out string errormsg, id),
-                UserDetailList = um.SelectUserList(out string errormsg2, id)
+                UserDetailList = um.SelectUserList(out string errormsg2, id),
+                userDetail = um.SelectUser(out string errormsg3, id)
             };
 
             TempData["user"] = id;
 
-            ViewBag.error = "1: " + errormsg + "2: " + errormsg2;
+            ViewBag.error = "1: " + errormsg + "2: " + errormsg2 + "3: " + errormsg3;
             return View(vmuh);
 
         }

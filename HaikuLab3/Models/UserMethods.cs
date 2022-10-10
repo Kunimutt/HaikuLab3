@@ -265,5 +265,124 @@ namespace HaikuLab3.Models
                 dbConnection.Close();
             }
         }
+
+        public int UpdateUserPhoto(string alias, string photo, out string error)
+        {
+            // Skapa SQL-connection
+            SqlConnection dbConnection = new SqlConnection();
+
+
+
+            // Koppling mot SQL Server
+            dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; // <- gå in på properties på databasen, under connection string
+            //dbConnection.ConnectionString = "Data Source=localhost,1433;Database=DemoDB;User Id=sa;Password=Pq7weQa1;";
+
+
+
+            // SQL-sträng
+            String insertSQL = "UPDATE [Tbl_User] SET [Us_Photo] = @photo WHERE [Us_Alias] = @alias";
+
+
+
+            // Lägg till en user
+            SqlCommand dbCommand = new SqlCommand(insertSQL, dbConnection);
+
+
+
+
+            dbCommand.Parameters.Add("alias", SqlDbType.NVarChar, 30).Value = alias;
+            dbCommand.Parameters.Add("photo", SqlDbType.NVarChar, 50).Value = photo;
+
+
+
+
+            // Exekvera SQL-strängen
+            try
+            {
+                dbConnection.Open();
+                int i = 0;
+                i = dbCommand.ExecuteNonQuery();
+                if (i == 1) { error = ""; }
+                else { error = "Det uppdaterades inte i databasen."; }
+                return (i);
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return 0;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+        }
+
+
+
+        public UserDetail SelectUser(out string errormsg, string alias)
+        {   // Skapa SQL-connection
+            SqlConnection dbConnection = new SqlConnection();
+
+
+
+            // Koppling mot SQL Server
+            dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; // <- gå in på properties på databasen, under connection string
+            //dbConnection.ConnectionString = "Data Source=localhost,1433;Database=DemoDB;User Id=sa;Password=Pq7weQa1;";
+
+
+
+            // SQL-sträng
+            String selectSQL = "SELECT * FROM myPage2 WHERE Us_Alias = @alias;";
+
+
+
+            // Lägg till en user
+            SqlCommand dbCommand = new SqlCommand(selectSQL, dbConnection);
+            dbCommand.Parameters.Add("alias", SqlDbType.NVarChar, 30).Value = alias;
+
+
+
+            SqlDataReader reader = null;
+
+
+
+            errormsg = "";
+
+
+
+            UserDetail userDetail = new UserDetail();
+
+
+
+            // Exekvera SQL-strängen
+            try
+            {
+                dbConnection.Open();
+                reader = dbCommand.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    userDetail.Us_Fname = reader["Us_Fname"].ToString();
+                    userDetail.Us_Lname = reader["Us_Lname"].ToString();
+                    userDetail.Us_Alias = reader["Us_Alias"].ToString();
+                    userDetail.Us_Age = Convert.ToInt16(reader["Us_Age"]);
+                    userDetail.Us_Email = reader["Us_Email"].ToString();
+                    userDetail.Us_Description = reader["Us_Description"].ToString();
+                    userDetail.Us_Photo = reader["Us_Photo"].ToString();
+
+                }
+                reader.Close();
+                return userDetail;
+            }
+            catch (Exception e)
+            {
+                errormsg = e.Message;
+                return null;
+            }
+            finally
+            {
+                dbConnection.Close();
+            }
+        }
     }
 }

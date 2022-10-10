@@ -56,7 +56,7 @@ namespace HaikuLab3.Models
             }
         }
 
-        public List<HaikuListDetail> SelectHaikuList(out string errormsg, string filter)
+        public List<HaikuListDetail> SelectHaikuList(out string errormsg,string filter)
         {
             // Skapa SQL-connection
             SqlConnection dbConnection = new SqlConnection();

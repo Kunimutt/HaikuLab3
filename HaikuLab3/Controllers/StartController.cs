@@ -81,6 +81,41 @@ namespace HaikuLab3.Controllers
             return View(vmhl);
             
         }
+        [HttpGet]
+        public IActionResult Testtest()
+        {
+            HaikuListMethods hlm = new HaikuListMethods();
+            GenreMethods gm = new GenreMethods();
+            ViewModelHaikuList vmhl = new ViewModelHaikuList
+            {
+                HaikuListDetailList = hlm.SelectHaikuList(out string errormsg1),
+                GenreDetailList = gm.SelectGenreList(out string errormsg2)
+            };
+            ViewBag.error = "1: " + errormsg1 + "2: " + errormsg2;
+            return View(vmhl);
+        }
+
+        [HttpPost]
+        public IActionResult Testtest(string search)
+        {
+            HaikuListMethods hlm = new HaikuListMethods();
+            GenreMethods gm = new GenreMethods();
+            ViewModelHaikuList vmhl = new ViewModelHaikuList
+            {
+                GenreDetailList = gm.SelectGenreList(out string errormsg3),
+                HaikuListDetailList = hlm.SearchHaikuList(out string errormsg2, search),
+                //HaikuListDetailList2 = hlm.SelectHaikuList(out string errormsg1, search),
+                
+                
+            };
+
+            ViewData["val"] = search;
+            ViewBag.error = "1: " + errormsg2 + "2: " + errormsg3;
+            return View(vmhl);
+        }
+
+
+
 
         [HttpGet]
         public IActionResult SearchHaikuList()

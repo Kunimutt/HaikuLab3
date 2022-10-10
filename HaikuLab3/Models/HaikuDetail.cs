@@ -9,7 +9,8 @@ namespace HaikuLab3.Models
 
         [Required(ErrorMessage = "Unik titel krävs")]
         public string Ha_Title { get; set; }
-        [Required(ErrorMessage = "Haikutext")]
+       
+        [Required(ErrorMessage = "Unik haiku krävs")]
         public string Ha_Content { get; set; }
 
         public string Ha_Alias { get; set; }

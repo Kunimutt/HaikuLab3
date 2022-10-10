@@ -8,7 +8,13 @@
 
 <h4>Hej @TempData["Test"]!</h4>
 
-<div>
+<div class="row">
+    <div class="col">
+        <div style="height: 300px; width: 300px; overflow: hidden; border: 1px solid #e5e5e5;">
+            <img class="img-fluid" src="~/uploads/@Model.userDetail.Us_Photo" />
+        </div>
+    </div>
+    <div class="col-8">
     <h5>Mina uppgifter</h5>
     <hr />
     <dl class="row">
@@ -53,15 +59,18 @@
          }
 
      </dl>
-</div>
-
-<div>
+     <div>
     @Html.ActionLink("Ändra email", "EditEmail", "User" /*new {id = Model.UserDetailList}*/) |
     @Html.ActionLink("Ta bort användare", "DeleteUser", "User") |
     @Html.ActionLink("Lägg till beskrivning", "AddDescription", "User") |
-    
+    @Html.ActionLink("Lägg till profilbild", "AddPic", "User")
     
 </div>
+</div>
+
+</div>
+
+<hr />
 <br />
 <br />
 <h5>Mina haikus</h5>
