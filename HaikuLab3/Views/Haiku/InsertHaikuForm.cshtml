@@ -24,7 +24,7 @@
                 <input asp-for="Ha_Content" class="form-control" id= "Ha_Content" name = "Ha_Content" onkeyup="countVowel();" />
                 <span asp-validation-for="Ha_Content" class="text-danger"></span>
             </div>
-            <p>Din haiku innehåller <span id = "inserthere"></span> stavelser.</p>
+            <p id="counttext" style="display:none;">Din haiku innehåller <span id = "inserthere"></span> stavelser.</p>
             
             
             <div class="form-group">
@@ -77,16 +77,15 @@
         var countingtext = document.getElementById("counttext");        
         countingtext.style.display = "block";
 
-        if (count < 17) {            
-            countingtext.style.color = "red";        } 
-            else if (count == 17) {            
-                countingtext.style.color = "green";        } 
-                else {            
-                    countingtext.style.color = "red";        }                
-                    area.innerHTML = count;
-
-
-
+        if (count < 17) {
+            countingtext.style.color = "red";        
+        } else if (count == 17) {            
+            countingtext.style.color = "green";        
+        } else {            
+            countingtext.style.color = "red";       
+        }                
+        
+        area.innerHTML = count;
         
         return count;
        
