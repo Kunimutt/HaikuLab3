@@ -18,17 +18,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Us_Fname" class="control-label">Förnamn</label>
-                <input asp-for="Us_Fname" class="form-control" aria-invalid = "false" aria-describedBy="err_1" />
+                <input asp-for="Us_Fname" class="form-control" aria-invalid = "false" aria-describedBy="err_1" maxlength="30" />
                 <span asp-validation-for="Us_Fname" class="text-danger" id="err_1"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Us_Lname" class="control-label">Efternamn</label>
-                <input asp-for="Us_Lname" class="form-control" aria-invalid = "false" aria-describedBy="err_2"/>
+                <input asp-for="Us_Lname" class="form-control" aria-invalid = "false" aria-describedBy="err_2" maxlength="30"/>
                 <span asp-validation-for="Us_Lname" class="text-danger" id="err_2"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Us_Alias" class="control-label">Alias</label>
-                <input asp-for="Us_Alias" class="form-control" aria-invalid = "false" aria-describedBy="err_3"/>
+                <input asp-for="Us_Alias" class="form-control" aria-invalid = "false" aria-describedBy="err_3" maxlength="30"/>
                 <span asp-validation-for="Us_Alias" class="text-danger" id="err_3" ></span>
             </div>
             <div class="form-group">
@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Us_Email" class="control-label">Email</label>
-                <input asp-for="Us_Email" pattern = "[A-Za-z0-9._+-]+@@[A-Za-z0-9 -]+\.[A-Za-z]{2,}" title="Vänligen skriv emailformatet enligt följande test@email.com" class="form-control" type ="email" aria-invalid = "false" aria-describedBy="err_5"/>
+                <input asp-for="Us_Email" pattern = "[A-Za-z0-9._+-]+@@[A-Za-z0-9 -]+\.[A-Za-z]{2,}" title="Vänligen skriv emailformatet enligt följande test@email.com" class="form-control" type ="email" aria-invalid = "false" aria-describedBy="err_5" maxlength="50"/>
                 <span asp-validation-for="Us_Email" class="text-danger" id="err_5"></span>
             </div>
             <br />

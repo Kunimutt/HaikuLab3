@@ -15,8 +15,10 @@
         <form asp-action="EditEmail">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
            
-             <div class= "form-group">
-                <input type="text" id="email" name="email"/>
+            <div class="form-group">
+                <label asp-for="Us_Email" class="control-label">Email</label>
+                <input asp-for="Us_Email" pattern = "[A-Za-z0-9._+-]+@@[A-Za-z0-9 -]+\.[A-Za-z]{2,}" title="Vänligen skriv emailformatet enligt följande test@email.com" class="form-control" type ="email" aria-invalid = "false" aria-describedBy="err_5" required maxlength="50"/>
+                <span asp-validation-for="Us_Email" class="text-danger" id="err_5"></span>
                 <input type = "submit" value ="Uppdatera" class ="btn-default" />
             </div>
 

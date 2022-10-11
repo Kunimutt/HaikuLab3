@@ -21,7 +21,7 @@ namespace HaikuLab3.Controllers
             if (ModelState.IsValid)
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add("bodil_95@hotmail.com");
+                mail.To.Add(_objModelMail.To);
                 mail.From = new MailAddress(_objModelMail.From);
                 mail.Subject = _objModelMail.Subject;
                 string Body = _objModelMail.Body;
@@ -31,7 +31,7 @@ namespace HaikuLab3.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("username", "password"); // Enter seders User name and password  
+                smtp.Credentials = new System.Net.NetworkCredential("moa.haldorson@gmail.com", "mqnhedlffhbylhrc"); // Enter seders User name and password  
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
                 return View("Index", _objModelMail);

@@ -186,47 +186,53 @@ namespace HaikuLab3.Controllers
                 return RedirectToAction("Home", "Start");
             }
             string alias = JsonConvert.DeserializeObject<string>(jsonstring);
-            string jsonstring3 = HttpContext.Session.GetString("testSession3");
-            string sesstest = JsonConvert.DeserializeObject<string>(jsonstring3);
+            //string jsonstring3 = HttpContext.Session.GetString("testSession3");
+            //string sesstest = JsonConvert.DeserializeObject<string>(jsonstring3);
             //string alias = uu.Us_Alias;
             ViewBag.jsonstring = jsonstring;
             TempData["Test"] = alias;
-            TempData["Test2"] = sesstest;
+            //TempData["Test2"] = sesstest;
             return View();
 
         }
 
         [HttpPost]
-        public IActionResult EditEmail(string email)
+        public IActionResult EditEmail(UserDetail ud)
         {
-            string jsonstring = HttpContext.Session.GetString("testSession");
-            if (jsonstring == null)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                string email = ud.Us_Email;
+                string jsonstring = HttpContext.Session.GetString("testSession");
+                if (jsonstring == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                string alias = JsonConvert.DeserializeObject<string>(jsonstring);
+                //string alias = uu.Us_Alias;
+                ViewBag.jsonstring = jsonstring;
+
+
+                UserMethods um = new UserMethods();
+                int i = 0;
+                string error = "";
+
+                i = um.UpdateUserEmail(alias, email, out error);
+
+                ViewBag.error = error;
+                ViewBag.antal = i;
+
+                if (error == "")
+                {
+                    return RedirectToAction("ShowMyPage");
+                }
+                else
+                {
+                    return View("UpdateViewFail");
+                }
+                
+
             }
-            string alias = JsonConvert.DeserializeObject<string>(jsonstring);
-            //string alias = uu.Us_Alias;
-            ViewBag.jsonstring = jsonstring;
-
-
-            UserMethods um = new UserMethods();
-            int i = 0;
-            string error = "";
-
-            i = um.UpdateUserEmail(alias, email, out error);
-
-            ViewBag.error = error;
-            ViewBag.antal = i;
-
-            if (error == "")
-            {
-                return RedirectToAction("ShowMyPage");
-            }
-            else
-            {
-                return View("UpdateViewFail");
-            }
-           
+            return RedirectToAction("EditEmail");
 
         }
 
@@ -284,6 +290,15 @@ namespace HaikuLab3.Controllers
         public IActionResult LogInUser()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult LogOutUser()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Home", "Start");
+            
         }
 
 

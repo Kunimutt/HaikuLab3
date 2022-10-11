@@ -61,13 +61,13 @@
      </dl>
      <div>
     @Html.ActionLink("Ändra email", "EditEmail", "User" /*new {id = Model.UserDetailList}*/) |
-    @Html.ActionLink("Ta bort användare", "DeleteUser", "User") |
     @Html.ActionLink("Lägg till beskrivning", "AddDescription", "User") |
-    @Html.ActionLink("Lägg till profilbild", "AddPic", "User")
+    @Html.ActionLink("Lägg till profilbild", "AddPic", "User") |
+    @Html.ActionLink("Logga ut", "LogOutUser", "User") 
+    <a asp-action="DeleteUser" class="btn btn-outline-danger btn-sm" onclick="return confirm ('Är du säker på att du vill radera din användare? OBS! Åtgärden är permanent.');">Ta bort användare</a>
     
 </div>
 </div>
-
 </div>
 
 <hr />
@@ -78,6 +78,7 @@
     <tr>
         <th>Titel</th>
         <th>Genre</th>
+        <th></th>
     </tr>
 
     @foreach (HaikuLab3.Models.HaikuListDetail HaikuListDetail in Model.HaikuListDetailList)

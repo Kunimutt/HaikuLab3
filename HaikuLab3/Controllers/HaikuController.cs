@@ -41,7 +41,6 @@ namespace HaikuLab3.Controllers
         [HttpPost]
         public IActionResult InsertHaikuForm(HaikuDetail hd)
         {
-
             if (ModelState.IsValid)
             {
                 HaikuMethods hm = new HaikuMethods();
@@ -72,7 +71,7 @@ namespace HaikuLab3.Controllers
                 
 
 
-            return View();
+            return RedirectToAction("InsertHaikuForm");
         }
     }
 }
