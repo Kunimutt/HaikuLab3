@@ -5,9 +5,12 @@
     ViewData["Title"] = "Bekräftelse";
 }
 
+<h2>Hej @TempData["Test"]!</h2>
+<h2>Hej @TempData["Test2"]!</h2>
 <h2>Bekräftelse</h2>
 <p>Användare har skapats!</p>
-<p>Ett eventuellt felmeddelande: @ViewBag.error</p>
+
+
 
 <div>
     @Html.ActionLink("Min sida", "ShowMyPage", "User", null, null) |

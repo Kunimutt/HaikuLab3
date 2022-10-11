@@ -2,10 +2,12 @@
     ViewData["Title"] = "InsertHaiku";
 }
 
+
 <h2>Bekräftelse</h2>
-<p>Haiku har skapats!</p>
-<p>Ett eventuellt felmeddelande: @ViewBag.error</p>
+<h6>Din haiku, "@TempData["rubrik"]" har skapats!</h6>
+
 
 <div>
-    @Html.ActionLink("Tillbaka till startsidan", "Home", "Start", null, null)
+    @Html.ActionLink("Tillbaka till startsidan", "Home", "Start", null, null) |
+    @Html.ActionLink("Visa haiku", "Details", "Start", new{ id= @TempData["rubrik"]})
 </div>

@@ -14,10 +14,12 @@
     </div>
     <img id="loading" style="width:50px; display:none;" src="~/images/loader.gif" />
     <br />
-    <div>
-        <input type="submit" name="Submit" />
-    </div>
+    
 </form>
+
+<div>
+    @Html.ActionLink("Tillbaka till min sida", "ShowMyPage", "User", null, null)
+</div>
 
 @section Scripts {
     <script>

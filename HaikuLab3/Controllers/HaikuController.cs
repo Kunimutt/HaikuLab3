@@ -6,8 +6,15 @@ namespace HaikuLab3.Controllers
 {
     public class HaikuController : Controller
     {
+        [HttpGet]
         public IActionResult InsertHaiku()
         {
+            string jsonstring2 = HttpContext.Session.GetString("testSession2");
+            string rubrik = JsonConvert.DeserializeObject<string>(jsonstring2);
+            //string alias = uu.Us_Alias;
+            ViewBag.jsonstring2 = jsonstring2;
+
+            TempData["rubrik"] = rubrik;
             return View();
         }
 
@@ -22,7 +29,7 @@ namespace HaikuLab3.Controllers
             string jsonstring = HttpContext.Session.GetString("testSession");
             if (jsonstring == null)
             {
-                return RedirectToAction("Home", "Start");
+                return RedirectToAction("LogInUser", "User");
             }
             string alias = JsonConvert.DeserializeObject<string>(jsonstring);
             //string alias = uu.Us_Alias;
@@ -40,17 +47,20 @@ namespace HaikuLab3.Controllers
                 HaikuMethods hm = new HaikuMethods();
                 int i = 0;
                 string error = "";
+                string rubrik = hd.Ha_Title;
 
                 i = hm.InsertHaiku(hd, out error);
 
-
                 ViewBag.error = error;
                 ViewBag.felmedd = "Ett eventuellt felmeddelande: " + error;
-                ViewBag.antal = i;
+                //ViewData["title"] = rubrik;
 
                 if (error == "")
                 {
-                    return View("InsertHaiku");
+                    string u2 = JsonConvert.SerializeObject(rubrik);
+                    HttpContext.Session.SetString("testSession2", u2);
+                    //return View("InsertHaiku");
+                    return RedirectToAction("InsertHaiku");
                 }
                 else 
                 {

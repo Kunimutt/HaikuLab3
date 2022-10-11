@@ -83,8 +83,21 @@ namespace HaikuLab3.Controllers
             return this._hostEnvironment.WebRootPath + "/uploads/" + filename;
         }
 
+        [HttpGet]
         public IActionResult InsertUser()
         {
+            string jsonstring = HttpContext.Session.GetString("testSession");
+            if (jsonstring == null)
+            {
+                return RedirectToAction("Home", "Start");
+            }
+            string alias = JsonConvert.DeserializeObject<string>(jsonstring);
+
+            
+            //string alias = uu.Us_Alias;
+            ViewBag.jsonstring = jsonstring;
+            TempData["Test"] = alias;
+            
             return View();
 
         }
@@ -112,6 +125,7 @@ namespace HaikuLab3.Controllers
                 int i = 0;
                 string error = "";
                 string alias = ud.Us_Alias;
+                string sesstest = "test av sessionsvariabel";
                 //string photo = ud.Us_Photo;
 
                 i = um.InsertUser(ud, out error);
@@ -123,7 +137,9 @@ namespace HaikuLab3.Controllers
                 {
                     string u = JsonConvert.SerializeObject(alias);
                     HttpContext.Session.SetString("testSession", u);
-                    return View("InsertUser");
+                    
+                    //return View("InsertUser");
+                    return RedirectToAction("InsertUser");
                 }
                 else
                 {
@@ -141,7 +157,7 @@ namespace HaikuLab3.Controllers
             string jsonstring = HttpContext.Session.GetString("testSession");
             if (jsonstring == null)
             {
-                return RedirectToAction("Home", "Start");
+                return RedirectToAction("LogInUser");
             }
             string alias = JsonConvert.DeserializeObject<string>(jsonstring);
             //string alias = uu.Us_Alias;
@@ -170,9 +186,12 @@ namespace HaikuLab3.Controllers
                 return RedirectToAction("Home", "Start");
             }
             string alias = JsonConvert.DeserializeObject<string>(jsonstring);
+            string jsonstring3 = HttpContext.Session.GetString("testSession3");
+            string sesstest = JsonConvert.DeserializeObject<string>(jsonstring3);
             //string alias = uu.Us_Alias;
             ViewBag.jsonstring = jsonstring;
             TempData["Test"] = alias;
+            TempData["Test2"] = sesstest;
             return View();
 
         }

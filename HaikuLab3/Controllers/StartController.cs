@@ -148,7 +148,9 @@ namespace HaikuLab3.Controllers
 
         [HttpGet]
         public IActionResult Details(string id)
-        {          
+        {
+            string u3 = JsonConvert.SerializeObject(id);
+            HttpContext.Session.SetString("testSession3", u3);
             HaikuMethods hm = new HaikuMethods();
             ViewModelHaikuRating vmhr = new ViewModelHaikuRating
             {
@@ -168,13 +170,15 @@ namespace HaikuLab3.Controllers
             string jsonstring = HttpContext.Session.GetString("testSession");
             if (jsonstring == null)
             {
-                return RedirectToAction("Home");
+                return RedirectToAction("LogInUser", "User");
             }
             string alias = JsonConvert.DeserializeObject<string>(jsonstring);
             
+
             ViewBag.jsonstring = jsonstring;
             TempData["Test"] = alias;
             TempData["Titel"] = id;
+            
 
             return View();
 
@@ -210,6 +214,7 @@ namespace HaikuLab3.Controllers
 
         public IActionResult InsertRatingFail()
         {
+            
             return View();
         }
 

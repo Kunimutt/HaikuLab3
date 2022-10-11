@@ -21,10 +21,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ha_Content" class="control-label">Skriv din haiku här</label>
-                <input asp-for="Ha_Content" class="form-control" id= "Ha_Content" name = "Ha_Content" onkeyup="countVowel();" />
-                <span asp-validation-for="Ha_Content" class="text-danger"></span>
+                <div class="input-group">
+                    <textarea asp-for="Ha_Content" style="resize:none;" rows="4" cols="50" class="form-control" id= "Ha_Content" name = "Ha_Content" onkeyup="countVowel();"></textarea>
+                    <img class="input-group-addon" id="check" style="width:40px; height:40px; visibility:hidden;" src="~/images/check.jpeg" />
+                    <span asp-validation-for="Ha_Content" class="text-danger"></span>
+                </div>
             </div>
-            <p id="counttext" style="display:none;">Din haiku innehåller <span id = "inserthere"></span> stavelser.</p>
+            <p id="counttext" style="display:none; font-weight:bold;">Din haiku innehåller <span id = "inserthere"></span> stavelser.</p>
             
             
             <div class="form-group">
@@ -55,7 +58,8 @@
 </div>
 
 <div>
-    @Html.ActionLink("Tillbaka till startsidan", "Home", "Start", null, null)
+    @Html.ActionLink("Tillbaka till startsidan", "Home", "Start", null, null) |
+    @Html.ActionLink("Till min sida", "ShowMyPage", "User", null, null)
 </div>
 
 @section Scripts{
@@ -73,16 +77,24 @@
             }
         }
       
+        var inputborder = document.getElementById("Ha_Content");
         var area = document.getElementById("inserthere");        
-        var countingtext = document.getElementById("counttext");        
+        var countingtext = document.getElementById("counttext");
+        var check = document.getElementById("check");
         countingtext.style.display = "block";
 
         if (count < 17) {
-            countingtext.style.color = "red";        
+            countingtext.style.color = "red";  
+            inputborder.style.border = "2px solid red";
+            check.style.visibility = "hidden";
         } else if (count == 17) {            
-            countingtext.style.color = "green";        
+            countingtext.style.color = "#32CD32";  
+            inputborder.style.border = "2px solid #32CD32"
+            check.style.visibility = "visible";
         } else {            
-            countingtext.style.color = "red";       
+            countingtext.style.color = "red";  
+            inputborder.style.border = "2px solid red";
+            check.style.visibility = "hidden";      
         }                
         
         area.innerHTML = count;
