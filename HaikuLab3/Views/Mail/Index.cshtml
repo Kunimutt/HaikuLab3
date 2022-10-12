@@ -20,13 +20,13 @@
    @using (Html.BeginForm())  
       {  
       @Html.ValidationSummary()  
-      <p>From: </p>  
-      <p>@Html.TextBoxFor(m=>m.From)</p>  
-      <p>To: </p>  
-      <p>@Html.TextBoxFor(m=>m.To)</p>  
-      <p>Subject: </p>  
+      <p>Från: </p>  
+      <p>@Html.TextBoxFor(m=>m.CC)</p>  
+      @*<p>To: </p>  
+      <p>@Html.TextBoxFor(m=>m.To)</p>  *@
+      <p>Ämne: </p>  
       <p>@Html.TextBoxFor(m=>m.Subject)</p>  
-      <p>Body: </p>  
+      <p>Skriv ditt ärende här: </p>  
       <p>@Html.TextAreaFor(m=>m.Body)</p>  
    <input type ="submit" value ="Send" />  
    } </fieldset>

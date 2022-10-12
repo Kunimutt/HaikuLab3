@@ -351,6 +351,7 @@ namespace HaikuLab3.Controllers
                 HaikuListDetailList = hlm.SelectHaikuListForUser(out string errormsg, id),
                 UserDetailList = um.SelectUserList(out string errormsg2, id),
                 userDetail = um.SelectUser(out string errormsg3, id)
+                
             };
 
             TempData["user"] = id;

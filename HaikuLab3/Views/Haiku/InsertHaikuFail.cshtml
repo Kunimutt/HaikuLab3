@@ -6,9 +6,15 @@
 <h2>Error</h2>
 
 <p>Haiku kunde inte skapas!</p>
-<p>Ett eventuellt felmeddelande: @ViewBag.error</p>
+
+<p>Din haiku finns redan i databasen. </p>
+
+<p>Vänligen kontrollera att din titel och din haiku inte redan finns upplagd.</p>
+<p>Klicka @Html.ActionLink("här", "Testtest", "Start", null, null) för att visa alla haikus.</p>
+
 <div>
-    @Html.ActionLink("Tillbaka", "InsertHaikuForm", "Haiku", null, null)
+    @Html.ActionLink("Tillbaka", "InsertHaikuForm", "Haiku", null, null) 
+    
 </div>
 
 

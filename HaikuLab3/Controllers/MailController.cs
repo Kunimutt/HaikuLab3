@@ -21,8 +21,9 @@ namespace HaikuLab3.Controllers
             if (ModelState.IsValid)
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add(_objModelMail.To);
-                mail.From = new MailAddress(_objModelMail.From);
+                mail.To.Add("bodil_95@hotmail.com");
+                mail.From = new MailAddress("moa.haldorson@gmail.com");
+                mail.CC.Add(_objModelMail.CC);
                 mail.Subject = _objModelMail.Subject;
                 string Body = _objModelMail.Body;
                 mail.Body = Body;

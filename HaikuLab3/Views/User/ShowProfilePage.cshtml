@@ -4,6 +4,19 @@
     ViewData["Title"] = "ShowMyPage";
 }
 
+@section MetaTags
+{
+    
+    <meta name = "description" content = "Haiku 2.0 är ett community för alla som älskar Haikus. Se din favoritpoets sida här" />
+    <meta name = "title" content = "@Model.userDetail.Us_Alias"/>
+    <meta name = "language" content = "sv"/>
+    <meta name = "type" content = "website"/>
+    <meta name = "keywords" content = "profilsida, poet, @Model.userDetail.Us_Alias, haiku"/>
+    <meta name = "publisher" content = "M. Haldorson, B. Salminen"/>
+ 
+
+}
+
 <h1>@TempData["user"]s användarprofil</h1>
 
 
