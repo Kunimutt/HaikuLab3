@@ -12,23 +12,27 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="InsertHaikuForm" onsubmit="return countVowel2();">
+        <form asp-action="InsertHaikuForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Ha_Title" class="control-label">Titel</label>
                 <input asp-for="Ha_Title" class="form-control" required maxlength="30" />
                 <span asp-validation-for="Ha_Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ha_Content" class="control-label">Skriv din haiku här</label>
-                <div class="input-group">
-                    <textarea asp-for="Ha_Content" style="resize:none;" rows="4" cols="50" class="form-control" id= "Ha_Content" name = "Ha_Content" onkeyup="countVowel();" required maxlength="70"></textarea>
-                    <img class="input-group-addon" id="check" style="width:40px; height:40px; visibility:hidden;" src="~/images/check.jpeg" />
-                    <span asp-validation-for="Ha_Content" class="text-danger"></span>
-                </div>
-            </div>
-            <p id="counttext" style="display:none; font-weight:bold;">Din haiku innehåller <span id = "inserthere"></span> stavelser.</p>
             
+            <div class="form-group row">
+
+                    <label asp-for="Ha_Content1">Rad 1</label>
+                    <input asp-for="Ha_Content1" class="form-control" id= "Ha_Content1" name = "Ha_Content1" onkeyup="countVowel5();" required maxlength="40"/>
+                    <p id="counttext1" style="display:none; font-weight:bold;">Din haiku innehåller <span id = "span1"></span> stavelser.</p>
+                    <label asp-for="Ha_Content2" class="control-label">Rad 2</label>
+                    <input asp-for="Ha_Content2" class="form-control" id= "Ha_Content2" name = "Ha_Content2" onkeyup="countVowel7();" required maxlength="55"/>
+                    <p id="counttext2" style="display:none; font-weight:bold;">Din haiku innehåller <span id = "inserthere2"></span> stavelser.</p>
+                    <label asp-for="Ha_Content3" class="control-label">Rad 3</label>
+                    <input asp-for="Ha_Content3" class="form-control" id= "Ha_Content3" name = "Ha_Content3" onkeyup="countVowel52();" required maxlength="40"/>
+                    <p id="counttext3" style="display:none; font-weight:bold;">Din haiku innehåller <span id = "inserthere3"></span> stavelser.</p>
+                
+            </div>
             
             <div class="form-group">
                 <label asp-for="Ha_Genre">Välj en genre</label>
@@ -50,7 +54,7 @@
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Skapa" class="btn btn-primary"/>
+                <input type="submit" value="Skapa" class="btn btn-primary" onclick="countVowelOfAll();"/>
             </div>
             <br />
         </form>
@@ -66,9 +70,45 @@
     <script>
     const vowels = ["a","e", "i", "o", "u", "y", "å", "ä", "ö"]
 
-    function countVowel(){
+ //   function countVowel(){
 
-        var input = document.getElementById("Ha_Content").value;
+ //       var input = document.getElementById("Ha_Content").value;
+ //       let count = 0;
+
+ //       for (let letter of input.toLowerCase()){
+ //           if (vowels.includes(letter)){
+ //               count++;
+ //           }
+ //       }
+      
+ //       var inputborder = document.getElementById("Ha_Content");
+ //       var area = document.getElementById("inserthere");        
+ //       var countingtext = document.getElementById("counttext");
+ //       var check = document.getElementById("check");
+ //       countingtext.style.display = "block";
+
+ //       if (count < 17) {
+ //           countingtext.style.color = "red";  
+ //           inputborder.style.border = "2px solid red";
+ //           check.style.visibility = "hidden";
+ //       } else if (count == 17) {            
+ //           countingtext.style.color = "#32CD32";  
+ //           inputborder.style.border = "2px solid #32CD32"
+ //           check.style.visibility = "visible";
+ //       } else {            
+ //           countingtext.style.color = "red";  
+ //           inputborder.style.border = "2px solid red";
+ //           check.style.visibility = "hidden";      
+ //       }                
+        
+ //       area.innerHTML = count;
+        
+ //       return count;
+       
+ //   }
+    function countVowel5(){
+
+        var input = document.getElementById("Ha_Content1").value;
         let count = 0;
 
         for (let letter of input.toLowerCase()){
@@ -77,38 +117,117 @@
             }
         }
       
-        var inputborder = document.getElementById("Ha_Content");
-        var area = document.getElementById("inserthere");        
-        var countingtext = document.getElementById("counttext");
-        var check = document.getElementById("check");
+        var inputborder = document.getElementById("Ha_Content1");
+        var span = document.getElementById("span1");        
+        var countingtext = document.getElementById("counttext1");
+        //var check = document.getElementById("check1");
         countingtext.style.display = "block";
 
-        if (count < 17) {
+        if (count < 5) {
             countingtext.style.color = "red";  
             inputborder.style.border = "2px solid red";
-            check.style.visibility = "hidden";
-        } else if (count == 17) {            
+            //check.style.visibility = "hidden";
+        } else if (count == 5) {            
             countingtext.style.color = "#32CD32";  
             inputborder.style.border = "2px solid #32CD32"
-            check.style.visibility = "visible";
+            //check.style.visibility = "visible";
         } else {            
             countingtext.style.color = "red";  
             inputborder.style.border = "2px solid red";
-            check.style.visibility = "hidden";      
+            //check.style.visibility = "hidden";      
         }                
         
-        area.innerHTML = count;
+        span.innerHTML = count;
         
         return count;
        
     }
 
-     function countVowel2(){
+    function countVowel52(){
 
-        var input = document.getElementById("Ha_Content").value;
-        let count = 0;
+        var input = document.getElementById("Ha_Content3").value;
+        let count2 = 0;
 
         for (let letter of input.toLowerCase()){
+            if (vowels.includes(letter)){
+                count2++;
+            }
+        }
+      
+        var inputborder = document.getElementById("Ha_Content3");
+        var area2 = document.getElementById("inserthere3");        
+        var countingtext = document.getElementById("counttext3");
+        //var check = document.getElementById("check3");
+        countingtext.style.display = "block";
+
+        if (count2 < 5) {
+            countingtext.style.color = "red";  
+            inputborder.style.border = "2px solid red";
+            //check.style.visibility = "hidden";
+        } else if (count2 == 5) {            
+            countingtext.style.color = "#32CD32";  
+            inputborder.style.border = "2px solid #32CD32"
+            //check.style.visibility = "visible";
+        } else {            
+            countingtext.style.color = "red";  
+            inputborder.style.border = "2px solid red";
+            //check.style.visibility = "hidden";      
+        }                
+        
+        area2.innerHTML = count2;
+        
+        return count2;
+       
+    }
+
+    function countVowel7(){
+
+        var input = document.getElementById("Ha_Content2").value;
+        let count3 = 0;
+
+        for (let letter of input.toLowerCase()){
+            if (vowels.includes(letter)){
+                count3++;
+            }
+        }
+      
+        var inputborder = document.getElementById("Ha_Content2");
+        var area3 = document.getElementById("inserthere2");        
+        var countingtext = document.getElementById("counttext2");
+        //var check = document.getElementById("check2");
+        countingtext.style.display = "block";
+
+        if (count3 < 7) {
+            countingtext.style.color = "red";  
+            inputborder.style.border = "2px solid red";
+            //check.style.visibility = "hidden";
+        } else if (count3 == 7) {            
+            countingtext.style.color = "#32CD32";  
+            inputborder.style.border = "2px solid #32CD32"
+            //check.style.visibility = "visible";
+        } else {            
+            countingtext.style.color = "red";  
+            inputborder.style.border = "2px solid red";
+            //check.style.visibility = "hidden";      
+        }                
+        
+        area3.innerHTML = count3;
+        
+        return count3;
+       
+    }
+
+     function countVowelOfAll(){
+
+        var rad1 = document.getElementById("Ha_Content1").value;
+        var rad2 = document.getElementById("Ha_Content2").value;
+        var rad3 = document.getElementById("Ha_Content3").value;
+
+        var tillsammans = rad1 + rad2 + rad3;
+
+        let count = 0;
+
+        for (let letter of tillsammans.toLowerCase()){
             if (vowels.includes(letter)){
                 count++;
             }

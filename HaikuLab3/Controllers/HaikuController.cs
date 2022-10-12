@@ -48,6 +48,8 @@ namespace HaikuLab3.Controllers
                 string error = "";
                 string rubrik = hd.Ha_Title;
 
+                //string allhaiku = hd.Ha_Content1 + " " + hd.Ha_Content2 + " " + hd.Ha_Content3;
+
                 i = hm.InsertHaiku(hd, out error);
 
                 ViewBag.error = error;
@@ -63,8 +65,8 @@ namespace HaikuLab3.Controllers
                 }
                 else 
                 {
-                    //return RedirectToAction("InsertHaikuForm");
-                    return View("InsertHaikuFail");
+                    return RedirectToAction("InsertHaikuFail");
+                    //return View("InsertHaikuFail");
                 }
 
             }

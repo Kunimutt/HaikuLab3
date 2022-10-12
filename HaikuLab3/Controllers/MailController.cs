@@ -16,26 +16,26 @@ namespace HaikuLab3.Controllers
             return View();
         }
         [HttpPost]
-        public ViewResult Index(Models.MailDetail _objModelMail)
+        public IActionResult Index(Models.MailDetail _objModelMail)
         {
             if (ModelState.IsValid)
             {
                 MailMessage mail = new MailMessage();
-                mail.To.Add("bodil_95@hotmail.com");
-                mail.From = new MailAddress("moa.haldorson@gmail.com");
-                mail.CC.Add(_objModelMail.CC);
+                mail.To.Add("skrivenhaiku@gmail.com");
+                mail.From = new MailAddress("skrivenhaiku@gmail.com");
+                //mail.CC.Add(_objModelMail.CC);
                 mail.Subject = _objModelMail.Subject;
-                string Body = _objModelMail.Body;
+                string Body = _objModelMail.Body + ". \nAvsändare: " + _objModelMail.CC;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("moa.haldorson@gmail.com", "mqnhedlffhbylhrc"); // Enter seders User name and password  
+                smtp.Credentials = new System.Net.NetworkCredential("skrivenhaiku@gmail.com", "pyhfhxltdoncdvbh"); // Enter seders User name and password  
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
-                return View("Index", _objModelMail);
+                return RedirectToAction("Home", "Start");
             }
             else
             {

@@ -24,8 +24,10 @@ namespace HaikuLab3.Models
             // Lägg till en user
             SqlCommand dbCommand = new SqlCommand(insertSQL, dbConnection);
 
+            string allhaiku = haiku.Ha_Content1 + haiku.Ha_Content2 + haiku.Ha_Content3;
+
             dbCommand.Parameters.Add("title", SqlDbType.NVarChar, 70).Value = haiku.Ha_Title;
-            dbCommand.Parameters.Add("content", SqlDbType.NVarChar, 70).Value = haiku.Ha_Content;
+            dbCommand.Parameters.Add("content", SqlDbType.NVarChar, 135).Value = allhaiku;
             dbCommand.Parameters.Add("author", SqlDbType.NVarChar, 30).Value = haiku.Ha_Alias;
             dbCommand.Parameters.Add("genre", SqlDbType.NVarChar, 70).Value = haiku.Ha_Genre;
             //dbCommand.Parameters.Add("photo", SqlDbType.Image).Value = haiku.Ha_Photo;

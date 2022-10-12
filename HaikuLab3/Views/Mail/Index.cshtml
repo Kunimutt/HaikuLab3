@@ -4,14 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Kontakta oss</h1>
 
-<h4>MailDetail</h4>
-<hr />
 
+<br />
+<br />
+<br />
  
-<h2>Index</h2>  
-<fieldset>  
+<h2>Skicka ett mail till oss med formuläret nedan</h2>  
+@*<fieldset>  
    <legend>  
       Send Email  
    </legend>  
@@ -23,45 +24,79 @@
       <p>Från: </p>  
       <p>@Html.TextBoxFor(m=>m.CC)</p>  
       @*<p>To: </p>  
-      <p>@Html.TextBoxFor(m=>m.To)</p>  *@
+      <p>@Html.TextBoxFor(m=>m.To)</p>
       <p>Ämne: </p>  
       <p>@Html.TextBoxFor(m=>m.Subject)</p>  
       <p>Skriv ditt ärende här: </p>  
       <p>@Html.TextAreaFor(m=>m.Body)</p>  
    <input type ="submit" value ="Send" />  
    } </fieldset>
-@*<div class="row">
+*@
+<div class="row">
     <div class="col-md-4">
-        <form asp-action="Index">
+        <form asp-action="Index" onsubmit="return alert('Tack för ditt meddelande!')">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="From" class="control-label"></label>
-                <input asp-for="From" class="form-control" />
-                <span asp-validation-for="From" class="text-danger"></span>
+                <label asp-for="CC" class="control-label">Från:</label>
+                <input asp-for="CC" class="form-control" required />
+                <span asp-validation-for="CC" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="To" class="control-label"></label>
-                <input asp-for="To" class="form-control" />
-                <span asp-validation-for="To" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+           
+            @*<div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
                 <input asp-for="Subject" class="form-control" />
                 <span asp-validation-for="Subject" class="text-danger"></span>
-            </div>
+            </div>*@
+            <br />
             <div class="form-group">
-                <label asp-for="Body" class="control-label"></label>
-                <input asp-for="Body" class="form-control" />
+                <label asp-for="Subject" class="control-label">Välj ett ämne</label>
+                <select id= "Subject" name ="Subject" class="form-control">
+                    <option value = "Inloggning">Inloggning</option>
+                    <option value = "Konto">Konto</option>
+                    <option value = "Hjälp">Hjälp</option>
+                    <option value = "Veckobrev">Veckobrev</option>
+                    <option value = "Haikubedömning">Haikubedömning</option>
+                    <option value = "Övrigt">Övrigt</option>
+                    
+                
+                </select>                     
+
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Body" class="control-label">Meddelande:</label>
+                <textarea asp-for="Body" id="message" class="form-control" maxlength="250" style="resize:none;" rows="6" cols="100" required onkeyup="countChars();"></textarea>
+                <p id="counttext"> <span id = "inserthere">0</span>/250</p>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Skicka" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>*@
+</div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+@section Scripts {
+
+    <script>
+    
+        function countChars() {
+
+            var input = document.getElementById("message").value;
+            let count = input.length;
+
+            var area = document.getElementById("inserthere");
+            area.innerHTML = count;
+
+        }
+        
+    
+    </script>
+
+}
