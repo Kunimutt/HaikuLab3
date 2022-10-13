@@ -6,32 +6,8 @@
 
 <h1>Kontakta oss</h1>
 
-
-<br />
-<br />
-<br />
- 
 <h2>Skicka ett mail till oss med formuläret nedan</h2>  
-@*<fieldset>  
-   <legend>  
-      Send Email  
-   </legend>  
 
-   <p> Kontakta oss med hjälp av nedan formulär. </p>
-   @using (Html.BeginForm())  
-      {  
-      @Html.ValidationSummary()  
-      <p>Från: </p>  
-      <p>@Html.TextBoxFor(m=>m.CC)</p>  
-      @*<p>To: </p>  
-      <p>@Html.TextBoxFor(m=>m.To)</p>
-      <p>Ämne: </p>  
-      <p>@Html.TextBoxFor(m=>m.Subject)</p>  
-      <p>Skriv ditt ärende här: </p>  
-      <p>@Html.TextAreaFor(m=>m.Body)</p>  
-   <input type ="submit" value ="Send" />  
-   } </fieldset>
-*@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Index" onsubmit="return alert('Tack för ditt meddelande!')">
@@ -42,11 +18,6 @@
                 <span asp-validation-for="CC" class="text-danger"></span>
             </div>
            
-            @*<div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
-                <span asp-validation-for="Subject" class="text-danger"></span>
-            </div>*@
             <br />
             <div class="form-group">
                 <label asp-for="Subject" class="control-label">Välj ett ämne</label>
@@ -75,10 +46,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 

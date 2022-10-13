@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HaikuLab3</title>
     @RenderSection("MetaTags", required: false)
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-minty.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HaikuLab3.styles.css" asp-append-version="true" />
-   @* <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-
-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>*@
+   
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HaikuLab3</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Start" asp-action="Home">Haiku 2.0</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,28 +22,27 @@ FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Start" asp-action="Home">Start</a>
+                            <a class="nav-link" asp-area="" asp-controller="Start" asp-action="Home">Start</a>
                         </li>
+                 
                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogInUser">Logga in</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="ShowMyPage">Min sida</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Haiku" asp-action="InsertHaikuForm">Lägg till haiku</a>
-                        </li>
-                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Start" asp-action="Testtest">Visa alla Haikus</a>
+                            <a class="nav-link" asp-area="" asp-controller="Start" asp-action="Testtest">Visa alla Haikus</a>
                         </li>
                       
                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mail" asp-action="Index">Kontakt</a>
+                            <a class="nav-link" asp-area="" asp-controller="Mail" asp-action="Index">Kontakt</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="User" asp-action="ShowMyPage">Min sida</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Haiku" asp-action="InsertHaikuForm">Lägg till haiku</a>
                         </li>
                         
-                        
                     </ul>
+                    <a class="btn btn-secondary" asp-area="" asp-controller="User" asp-action="LogInUser">Logga in</a>
                 </div>
             </div>
         </nav>
@@ -55,7 +53,7 @@ FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer bg-primary text-white">
         <div class="container">
             &copy; 2022 - HaikuLab3
         </div>

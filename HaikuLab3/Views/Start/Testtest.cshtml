@@ -16,7 +16,7 @@
     <div class="form-group col-md-4">
         <form asp-action="Testtest">
             <div class="form-group">
-                <select class="form-control" id="search" name="search" class="form-select">
+                <select class="form-control form-select" id="search" name="search">
                     @foreach (HaikuLab3.Models.GenreDetail GenreDetail in Model.GenreDetailList)
                     {
                         <option value="@GenreDetail.Ge_Name"> @GenreDetail.Ge_Name </option>
@@ -64,16 +64,16 @@
 
 
 <table class="table" id="testsortering">
+    <thead>
     <tr>
         <th onclick="sortTable(0)">Titel</th>
         <th onclick="sortTable(1)">Författare</th>
         <th onclick="sortTable(2)">Genre</th>
         <th></th>
    </tr>
+   </thead>
 
- 
-
-
+   <tbody>
 @foreach (HaikuLab3.Models.HaikuListDetail HaikuListDetail in Model.HaikuListDetailList)    
 { 
     <tr>     
@@ -85,8 +85,8 @@
         </td>        
     </tr>   
 }
-
- 
+</tbody>
+</table>
 
 <script>
     function sortTable(n) {
