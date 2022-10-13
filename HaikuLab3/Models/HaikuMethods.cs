@@ -24,36 +24,13 @@ namespace HaikuLab3.Models
             // Lägg till en user
             SqlCommand dbCommand = new SqlCommand(insertSQL, dbConnection);
 
-            string allhaiku = haiku.Ha_Content1 + haiku.Ha_Content2 + haiku.Ha_Content3;
+            //string allhaiku = haiku.Ha_Content1 + haiku.Ha_Content2 + haiku.Ha_Content3;
 
             dbCommand.Parameters.Add("title", SqlDbType.NVarChar, 70).Value = haiku.Ha_Title;
-            dbCommand.Parameters.Add("content", SqlDbType.NVarChar, 135).Value = allhaiku;
+            dbCommand.Parameters.Add("content", SqlDbType.NVarChar, 135).Value = haiku.Ha_Content;
             dbCommand.Parameters.Add("author", SqlDbType.NVarChar, 30).Value = haiku.Ha_Alias;
             dbCommand.Parameters.Add("genre", SqlDbType.NVarChar, 70).Value = haiku.Ha_Genre;
-            //dbCommand.Parameters.Add("photo", SqlDbType.Image).Value = haiku.Ha_Photo;
-
-            //try
-            //{
-            //    dbConnection.Open();
-            //    int haikuCount = (int)dbCommand.ExecuteScalar();
-            //    if (haikuCount == 1)
-            //    {
-            //        errormsg = "";
-            //    }
-            //    else { errormsg = "Ange korrekt alias och email eller skapa ett nytt konto"; }
-            //    return (haikuCount);
-            //}
-            //catch (Exception e)
-            //{
-            //    errormsg = e.Message;
-            //    return 0;
-            //}
-            //finally
-            //{
-            //    dbConnection.Close();
-            //}
-
-            // Exekvera SQL-strängen
+            
             try
             {
                 dbConnection.Open();
@@ -149,7 +126,7 @@ namespace HaikuLab3.Models
             dbConnection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=HaikusDB;Integrated Security=True"; // <- gå in på properties på databasen, under connection string
 
             // SQL-sträng
-            String selectSQL = "SELECT Average FROM showAverageRating WHERE Ha_Title = @id"; 
+            String selectSQL = "SELECT Average, NumberofVotes FROM showAverageRating WHERE Ha_Title = @id"; 
 
 
 
@@ -162,8 +139,6 @@ namespace HaikuLab3.Models
             SqlDataReader reader = null;
             List<RatingDetail>Ratinglist = new List<RatingDetail>();
 
-
-            //RatingDetail ratingDetail = new RatingDetail();
             errormsg2 = "";
 
 
@@ -176,7 +151,7 @@ namespace HaikuLab3.Models
                 while (reader.Read())
                 {
                     RatingDetail rating = new RatingDetail();
-                    //rating.Ra_RatingAverage = Convert.ToInt16(reader["Average"]);
+                    rating.Ra_Votes = Convert.ToInt32(reader["NumberofVotes"]);
                     rating.Ra_RatingAverage = Convert.ToDouble(reader["Average"]);
                     
                     Ratinglist.Add(rating);

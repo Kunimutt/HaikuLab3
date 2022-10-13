@@ -13,9 +13,9 @@ namespace HaikuLab3.Models
         [Required(ErrorMessage = "Unik haiku krävs")]
         public string Ha_Content { get; set; }
 
-        public string Ha_Content1 { get; set; }
-        public string Ha_Content2 { get; set; }
-        public string Ha_Content3 { get; set; }
+        //public string Ha_Content1 { get; set; }
+        //public string Ha_Content2 { get; set; }
+        //public string Ha_Content3 { get; set; }
 
         public string Ha_Alias { get; set; }
 

@@ -84,6 +84,7 @@ namespace HaikuLab3.Models
                     TopRatingDetail TopRatingDetail = new TopRatingDetail();
                     TopRatingDetail.Tr_Title = reader["Ha_Title"].ToString();
                     TopRatingDetail.Tr_Average = Convert.ToDouble(reader["Average"]);
+                    TopRatingDetail.Tr_Votes = Convert.ToInt32(reader["NumberofVotes"]);
                     TopRatingDetail.Tr_Row = Convert.ToInt16(reader["Placering"]);
 
                     TopRatingList.Add(TopRatingDetail);

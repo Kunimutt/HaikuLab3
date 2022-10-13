@@ -48,7 +48,7 @@ namespace HaikuLab3.Controllers
                 string error = "";
                 string rubrik = hd.Ha_Title;
 
-                //string allhaiku = hd.Ha_Content1 + " " + hd.Ha_Content2 + " " + hd.Ha_Content3;
+                //hd.Ha_Content = Content1 + " " + Content2 + " " + Content3;
 
                 i = hm.InsertHaiku(hd, out error);
 
