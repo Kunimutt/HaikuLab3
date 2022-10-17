@@ -3,38 +3,38 @@
 @{
     ViewData["Title"] = "InsertHaikuForm";
 }
-
+<div class="text-center my-5">
 <h1>Skapa en haiku</h1>
 
 <h5>Hej @TempData["Test"]!</h5>
+</div>
 
-<p>@ViewBag.felmedd</p>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row justify-content-center gap-5">
+    <div class="col-5 text-center">
+        <h2 class="mb-4">Skriv din haiku här</h2>
         <form asp-action="InsertHaikuForm" onsubmit="return countVowelOfAll()">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group text-start mb-3">
                 <label asp-for="Ha_Title" class="control-label">Titel</label>
                 <input asp-for="Ha_Title" class="form-control" required maxlength="30" />
                 <span asp-validation-for="Ha_Title" class="text-danger"></span>
             </div>
 
-             <div class="form-group">
+             <div class="form-group text-start mb-3">
                 <label asp-for="Ha_Content" class="control-label">Skriv din haiku här</label>
-                <div class="input-group">
                 <textarea asp-for="Ha_Content" style="resize:none;" rows="3" class="form-control" id= "Ha_Content" name = "Ha_Content" onkeyup="countVowel();" required maxlength="135" ></textarea>
-                <img id="check" style="width:40px; height:40px; visibility:hidden;" class="input-group-addon" src="~/images/check.jpeg" />
-                </div>
                <span asp-validation-for="Ha_Content" class="text-danger"></span>
-               <p id="counttext" style="display:none; font-weight:bold;">Din haiku innehåller <span id = "span"></span> stavelser.</p>
-            
+               <div class="d-flex">
+                    <img id="check" style="width:40px; height:40px; display:none;" src="~/images/check.jpeg" />
+                    <p class="my-auto" id="counttext" style="display:none; font-weight:bold;">Din haiku innehåller <span id = "span"></span> stavelser.</p>
+               </div>
                 
             </div>
             
-            <div class="form-group">
+            <div class="form-group text-start">
                 <label asp-for="Ha_Genre">Välj en genre</label>
-                <select id= "Ha_Genre" name ="Ha_Genre">
+                <select id= "Ha_Genre" name ="Ha_Genre" class="form-select dropdown">
                     <option value = "drama">Drama</option>
                     <option value = "skräck">Skräck</option>
                     <option value = "komedi">Komedi</option>
@@ -50,21 +50,34 @@
             <div>
                 <input type="hidden" id="Ha_Alias" name="Ha_Alias" value="@TempData["Test"]"/>
             </div>
-          
-
-            <br />
-            <div class="form-group">
+         
+            <div class="form-group mt-4">
                 <input type="submit" value="Skapa" class="btn btn-primary"/>
             </div>
-            <br />
         </form>
+        
+        
+    </div>
+    
+    <div class="col-5 card p-5">
+        <h3>Checklista för en lyckad haiku</h3>
+        
+        <ul>
+            <li title="Tips! Gå in på Visa alla Haiku för att söka på titeln du tänkt använda, för att dubbelkolla att den inte redan existerar">Din haiku måste vara unik</li>
+            <li title="Tips! Använd stavelseräknaren under textrutan för att hjälpa dig hålla koll på antal stavelser">Din haiku måste innehålla sammanlagt 17 stavelser (5 på första raden, 7 på andra raden och 5 på sista raden)</li>
+            <li title="Tips! Saknar du en genre? Använd kontaktformuläret för att be oss lägga till en specifik genre">Välj en lämplig genre för din haiku</li>
+        </ul>
+        <p>Psst! Se mer information om varje punkt genom att föra muspekaren över texten.</p>
+        <p>Om du är missnöjd med bedömningen av din haiku så kan du höra av dig till oss via kontaktformuläret. Vi kommer därefter granska din haiku noggrant och återkoppla inom kort.</p>
     </div>
 </div>
-
-<div>
-    @Html.ActionLink("Tillbaka till startsidan", "Home", "Start", null, null) |
-    @Html.ActionLink("Till min sida", "ShowMyPage", "User", null, null)
+<div class="text-center my-5">
+    <div>
+      @Html.ActionLink("Tillbaka till startsidan", "Home", "Start", null, null)<br />
+      @Html.ActionLink("Till min sida", "ShowMyPage", "User", null, null)
+      </div>
 </div>
+
 
 @section Scripts{
     <script>
@@ -90,15 +103,15 @@
         if (count < 17) {
             countingtext.style.color = "red";  
             inputborder.style.border = "2px solid red";
-            check.style.visibility = "hidden";
+            check.style.display = "none";
         } else if (count == 17) {            
             countingtext.style.color = "#32CD32";  
             inputborder.style.border = "2px solid #32CD32"
-            check.style.visibility = "visible";
+            check.style.display = "block";
         } else {            
             countingtext.style.color = "red";  
             inputborder.style.border = "2px solid red";
-            check.style.visibility = "hidden";      
+            check.style.display = "none";      
         }                
         
         area.innerHTML = count;
@@ -106,124 +119,9 @@
         return count;
        
     }
- //   function countVowel5(){
-
- //       var input = document.getElementById("Content1").value;
- //       let count = 0;
-
- //       for (let letter of input.toLowerCase()){
- //           if (vowels.includes(letter)){
- //               count++;
- //           }
- //       }
-      
- //       var inputborder = document.getElementById("Content1");
- //       var span = document.getElementById("span1");        
- //       var countingtext = document.getElementById("counttext1");
- //       //var check = document.getElementById("check1");
- //       countingtext.style.display = "block";
-
- //       if (count < 5) {
- //           countingtext.style.color = "red";  
- //           inputborder.style.border = "2px solid red";
- //           //check.style.visibility = "hidden";
- //       } else if (count == 5) {            
- //           countingtext.style.color = "#32CD32";  
- //           inputborder.style.border = "2px solid #32CD32"
- //           //check.style.visibility = "visible";
- //       } else {            
- //           countingtext.style.color = "red";  
- //           inputborder.style.border = "2px solid red";
- //           //check.style.visibility = "hidden";      
- //       }                
-        
- //       span.innerHTML = count;
-        
- //       return count;
-       
- //   }
-
- //   function countVowel52(){
-
- //       var input = document.getElementById("Content3").value;
- //       let count2 = 0;
-
- //       for (let letter of input.toLowerCase()){
- //           if (vowels.includes(letter)){
- //               count2++;
- //           }
- //       }
-      
- //       var inputborder = document.getElementById("Content3");
- //       var area2 = document.getElementById("inserthere3");        
- //       var countingtext = document.getElementById("counttext3");
- //       //var check = document.getElementById("check3");
- //       countingtext.style.display = "block";
-
- //       if (count2 < 5) {
- //           countingtext.style.color = "red";  
- //           inputborder.style.border = "2px solid red";
- //           //check.style.visibility = "hidden";
- //       } else if (count2 == 5) {            
- //           countingtext.style.color = "#32CD32";  
- //           inputborder.style.border = "2px solid #32CD32"
- //           //check.style.visibility = "visible";
- //       } else {            
- //           countingtext.style.color = "red";  
- //           inputborder.style.border = "2px solid red";
- //           //check.style.visibility = "hidden";      
- //       }                
-        
- //       area2.innerHTML = count2;
-        
- //       return count2;
-       
- //   }
-
- //   function countVowel7(){
-
- //       var input = document.getElementById("Content2").value;
- //       let count3 = 0;
-
- //       for (let letter of input.toLowerCase()){
- //           if (vowels.includes(letter)){
- //               count3++;
- //           }
- //       }
-      
- //       var inputborder = document.getElementById("Content2");
- //       var area3 = document.getElementById("inserthere2");        
- //       var countingtext = document.getElementById("counttext2");
- //       //var check = document.getElementById("check2");
- //       countingtext.style.display = "block";
-
- //       if (count3 < 7) {
- //           countingtext.style.color = "red";  
- //           inputborder.style.border = "2px solid red";
- //           //check.style.visibility = "hidden";
- //       } else if (count3 == 7) {            
- //           countingtext.style.color = "#32CD32";  
- //           inputborder.style.border = "2px solid #32CD32"
- //           //check.style.visibility = "visible";
- //       } else {            
- //           countingtext.style.color = "red";  
- //           inputborder.style.border = "2px solid red";
- //           //check.style.visibility = "hidden";      
- //       }                
-        
- //       area3.innerHTML = count3;
-        
- //       return count3;
-       
- //   }
-
+ 
      function countVowelOfAll(){
 
-        //var rad1 = document.getElementById("Content1").value;
-        //var rad2 = document.getElementById("Content2").value;
-        //var rad3 = document.getElementById("Content3").value;
-
-        //var tillsammans = rad1 + rad2 + rad3;
         var input = document.getElementById("Ha_Content").value;
 
         let count = 0;
@@ -234,9 +132,8 @@
             }
         }
        
-
         if(count == 17){
-            //document.getElementById("Ha_Content").value = tillsammans;
+            
             return true;
         } else{
             alert("Din haiku innehåller: " + count + " stavelser. En haiku ska innehålla 17 stavelser (5 + 7 + 5), vänligen se över detta och försök igen.");
@@ -245,9 +142,6 @@
        
        
     }
-   
-
-    
     
     </script>
 

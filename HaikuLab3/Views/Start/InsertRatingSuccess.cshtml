@@ -2,10 +2,29 @@
     ViewData["Title"] = "InsertRatingSuccess";
 }
 
-<h2>Bekräftelse</h2>
+@*<h2>Bekräftelse</h2>
 <p>Du har betygsatt en haiku!</p>
 
 <div>
-    @Html.ActionLink("Till startsidan", "Home", "Start", null, null) |
-     @Html.ActionLink("Till alla haikus", "Testtest", "Start")
+    
+</div>*@
+
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="btn-close" onclick="return toStart()"></button>
+    <strong>Du har betygsatt en haiku!</strong><br />
+     @Html.ActionLink("Till startsidan", "Home", "Start", null, null)
 </div>
+
+ 
+
+<script>
+    function toStart() {
+
+ 
+
+        window.location.href = '@Url.Action("Testtest", "Start")';
+
+ 
+
+    }
+</script>

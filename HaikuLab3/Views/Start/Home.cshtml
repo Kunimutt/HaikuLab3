@@ -1,97 +1,127 @@
 ﻿@model HaikuLab3.Models.ViewModelToplist
 
+ 
+
 @{
     ViewData["Title"] = "Home";
 }
 
-<h1>Välkommen!</h1>
+ 
 
-<div class="container-fluid d-flex">
+<div class="container">
+    <div class="row py-5">
+        <div class="col-lg-5 mb-4 text-center text-md-center text-sm-center text-lg-start text-xl-start">
+            <h1>Välkommen!</h1>
+            <p class="mt-4">Duis placerat, nisl sed aliquet commodo, in pulvinar risus augue ac sem. Sed id ante auctor, tristique magna non, pharetra ipsum. Vestibulum consectetur mauris urna. Nulla tempor dui a orci dignissim, eget rhoncus ante vestibulum. Vestibulum elementum velit a ante porta vestibulum. Vivamus volutpat egestas massa.</p>
+            <a asp-area="" asp-controller="User" asp-action="InsertUserForm" class="btn btn-lg btn-secondary my-5">Gå med nu</a>
+        </div>
+        <div class="col-lg">
+            <img class="img-fluid" src="~/images/Cool Kids - Study.svg" />
+        </div>
+    </div>
+
+ 
+
+    <div class="row py-5">
+         <div class="col-lg">
+                <h4 class="text-center">Våra mest flitiga Haiku-poeter!<img src="~/images/Cool Kids - Arrow.svg" style="width:60px;" /></h4>
+
+ 
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+
+ 
+
+                            </th>
+                            <th>
+                                Författare
+                            </th>
+                            <th>
+                                Antal bidrag
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (HaikuLab3.Models.TopHaikuDetail TopHaikuDetail in Model.TopHaikuDetailList)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => TopHaikuDetail.Th_Row)
+                                </td>
+                                <td>
+                                    @Html.ActionLink(TopHaikuDetail.Th_Author, "ShowProfilePage", "User", new { id = TopHaikuDetail.Th_Author })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => TopHaikuDetail.Th_Count)
+                                </td>
+                               
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+ 
+
+            <div class="col-lg mt-xl-0 mt-lg-0 mt-md-5 mt-sm-5 mt-5">
+                <h4 class="text-center">Våra mest uppskattade haikus!<img src="~/images/Cool Kids - Arrow.svg" style="width:60px;" /></h4>
+
+ 
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+
+ 
+
+                            </th>
+                            <th>
+                                Titel
+                            </th>
+                            <th>
+                                Betyg
+                            </th>
+                            <th>
+                                Antal röster
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (HaikuLab3.Models.TopRatingDetail TopRatingDetail in Model.TopRatingDetailList)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Row)
+                                </td>
+                                <td>
+                                    @Html.ActionLink(TopRatingDetail.Tr_Title, "Details", new { id = TopRatingDetail.Tr_Title })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Average)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Votes)
+                                </td>
+                                <td>
+                                    
+                                </td>
+
+ 
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+ 
+
+            </div>
+        </div>
     
-<div>
-<h4>Topplista över våra mest flitiga Haiku-poeter!</h4>
-
-<table class="table">
-    <thead>
-        <tr>
-             <th>
-                
-            </th>
-            <th>
-                Författare
-            </th>
-            <th>
-                Antal bidrag
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (HaikuLab3.Models.TopHaikuDetail TopHaikuDetail in Model.TopHaikuDetailList) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => TopHaikuDetail.Th_Row)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => TopHaikuDetail.Th_Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => TopHaikuDetail.Th_Count)
-            </td>
-            <td>
-                @Html.ActionLink("Visa användarprofil", "ShowProfilePage", "User", new { id= TopHaikuDetail.Th_Author })
-            </td>
-            
-        </tr>
-}
-    </tbody>
-</table>
-</div>
-
-<div>
-<h4>Topplista över våra mest uppskattade haikus!</h4>
-
-<table class="table">
-    <thead>
-        <tr>
-             <th>
-                
-            </th>
-            <th>
-                Titel
-            </th>
-            <th>
-                Betyg
-            </th>
-            <th>
-                Antal röster
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (HaikuLab3.Models.TopRatingDetail TopRatingDetail in Model.TopRatingDetailList) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Row)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Average)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => TopRatingDetail.Tr_Votes)
-            </td>
-            <td>
-                @Html.ActionLink("Visa haiku", "Details", new { id= TopRatingDetail.Tr_Title })
-            </td>
-            
-        </tr>
-}
-    </tbody>
-</table>
-
-</div>
-</div>
+    </div>

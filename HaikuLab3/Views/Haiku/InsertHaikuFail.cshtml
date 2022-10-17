@@ -3,19 +3,24 @@
     ViewData["Title"] = "InsertHaikuFail";
 }
 
-<h2>Error</h2>
-
-<p>Haiku kunde inte skapas!</p>
-
-<p>Din haiku finns redan i databasen. </p>
-
-<p>Vänligen kontrollera att din titel och din haiku inte redan finns upplagd.</p>
-<p>Klicka @Html.ActionLink("här", "Testtest", "Start", null, null) för att visa alla haikus.</p>
-
-<div>
-    @Html.ActionLink("Tillbaka", "InsertHaikuForm", "Haiku", null, null) 
-    
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" onclick="return toStart()"></button>
+    <strong>Din haiku kunde inte skapas!</strong> Din haiku finns redan i databasen. Vänligen kontrollera att din tilltänkta titel inte redan är upptagen @Html.ActionLink("här", "Testtest", "Start", null, null).
+    <br />
+    <br />
+    <strong>OBS! Det är inte tillåtet att plagiera någon annans haiku.</strong>
 </div>
 
+ 
 
+<script>
+    function toStart() {
 
+ 
+
+        window.location.href = '@Url.Action("InsertHaikuForm", "Haiku")';
+
+ 
+
+    }
+</script>

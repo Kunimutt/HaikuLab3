@@ -2,21 +2,31 @@
 
  
 
+ 
+
+ 
+
 @{
     ViewData["Title"] = "Testtest";
 }
 
  
 
-<h1>Visa alla Haiku</h1>
+<h1 class="text-center my-5">Visa alla Haiku</h1>
 
  
 
-<div class="row">
-    <div class="form-group col-md-4">
+<div class="row mb-3">
+    <div class="form-group col-10 col-md-8 col-lg-6 mx-auto">
         <form asp-action="Testtest">
-            <div class="form-group">
-                <select class="form-control form-select" id="search" name="search">
+            <div class="form-group d-flex">
+                <input class="form-control" type="text" id="search" name="search" />
+                <input type="submit" value="Sök" class="btn btn-secondary" />
+            </div>
+        </form>
+        <form asp-action="Testtest">
+            <div class="form-group d-flex col-8 mt-3">
+                <select class="form-control form-select dropdown" id="search" name="search">
                     @foreach (HaikuLab3.Models.GenreDetail GenreDetail in Model.GenreDetailList)
                     {
                         <option value="@GenreDetail.Ge_Name"> @GenreDetail.Ge_Name </option>
@@ -25,68 +35,55 @@
 
                     }
                 </select>
-
- 
-
-            </div>
-
- 
-
-            <div class="form-group">
-                <input type="submit" value="Filtrera" class="btn-default" />
+                <input type="submit" value="Filtrera" class="btn btn-secondary" />
             </div>
 
  
 
         </form>
-        @*<p>Du har valt: @ViewData["val"]</p>*@
-    </div>
-    <div class="form-group col-md-4">
-        <form asp-action="Testtest">
-            <div class="form-group">
-                <input class="form-control" type="text" id="search" name="search" />
-                <input type="submit" value="Sök" class="btn-default" />
-            </div>
-
- 
-
-        </form>
-       
     </div>
 </div>
 
  
 
-
-<h2>Lista med haikus</h2>
+<div class="row mt-5">
+    <div class="col d-none d-md-block">
+        <img src="~/images/Cool Kids - Standing.svg" class="img-fluid" />
+    </div>
+    <div class="col col-md-8">
+        <table class="table table-hover" id="testsortering">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">Titel</th>
+                    <th onclick="sortTable(1)">Författare</th>
+                    <th onclick="sortTable(2)">Genre</th>
+                </tr>
+            </thead>
 
  
 
+            <tbody>
+                @foreach (HaikuLab3.Models.HaikuListDetail HaikuListDetail in Model.HaikuListDetailList)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(HaikuListDetail.Hl_Title, "Details", new { id = HaikuListDetail.Hl_Title })</td>
+                        <td>@Html.ActionLink(@HaikuListDetail.Hl_Author, "ShowProfilePage", "User", new { id = HaikuListDetail.Hl_Author })</td>
+                        <td>@HaikuListDetail.Hl_Genre</td>
+                    </tr>
 
-<table class="table" id="testsortering">
-    <thead>
-    <tr>
-        <th onclick="sortTable(0)">Titel</th>
-        <th onclick="sortTable(1)">Författare</th>
-        <th onclick="sortTable(2)">Genre</th>
-        <th></th>
-   </tr>
-   </thead>
+ 
 
-   <tbody>
-@foreach (HaikuLab3.Models.HaikuListDetail HaikuListDetail in Model.HaikuListDetailList)    
-{ 
-    <tr>     
-        <td>@HaikuListDetail.Hl_Title</td>            
-        <td>@Html.ActionLink(@HaikuListDetail.Hl_Author, "ShowProfilePage", "User", new { id= HaikuListDetail.Hl_Author })</td>            
-        <td>@HaikuListDetail.Hl_Genre</td>            
-        <td>                               
-            @Html.ActionLink("Visa haiku", "Details", new { id= HaikuListDetail.Hl_Title })                             
-        </td>        
-    </tr>   
-}
-</tbody>
-</table>
+                }
+            </tbody>
+        </table>
+    </div>
+
+ 
+
+</div>
+
+ 
+
 
 <script>
     function sortTable(n) {
@@ -143,4 +140,7 @@
             }
         }
     }
+
+ 
+
 </script>

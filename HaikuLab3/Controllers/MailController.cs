@@ -15,6 +15,7 @@ namespace HaikuLab3.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Index(Models.MailDetail _objModelMail)
         {
@@ -23,7 +24,6 @@ namespace HaikuLab3.Controllers
                 MailMessage mail = new MailMessage();
                 mail.To.Add("skrivenhaiku@gmail.com");
                 mail.From = new MailAddress("skrivenhaiku@gmail.com");
-                //mail.CC.Add(_objModelMail.CC);
                 mail.Subject = _objModelMail.Subject;
                 string Body = _objModelMail.Body + ". \nAvsändare: " + _objModelMail.CC;
                 mail.Body = Body;
