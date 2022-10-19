@@ -3,7 +3,24 @@
     ViewData["Title"] = "InsertUserFail";
 }
 
-<h2>Error</h2>
+ 
 
-<p>Användare kunde inte skapas!</p>
-<p>Ett eventuellt felmeddelande: @ViewBag.error</p>
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" onclick="return redirect()"></button>
+    <strong>Användare kunde inte skapas!</strong> Användarnamnet är upptaget försök igen<br />
+    
+</div>
+
+ 
+
+<script>
+    function redirect() {
+
+ 
+
+        window.location.href = '@Url.Action("InsertUserForm", "User")';
+
+ 
+
+    }
+</script>

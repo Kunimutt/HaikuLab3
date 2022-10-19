@@ -98,6 +98,7 @@ namespace HaikuLab3.Models
                     Haiku.Ha_Content = reader["Ha_Content"].ToString();
                     Haiku.Ha_Alias = reader["Us_Alias"].ToString();
                     Haiku.Ha_Genre = reader["Ge_Name"].ToString();
+                    Haiku.Ha_Date = Convert.ToDateTime(reader["Ha_Date"]).ToString("dd-MM-yyyy");
 
                     Haikulist.Add(Haiku);
 

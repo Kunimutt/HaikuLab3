@@ -3,13 +3,17 @@
 @{
     ViewData["Title"] = "EditEmail";
 }
+<br />
+<h1>Ändra Email</h1>
 
-<h1>EditEmail</h1>
+<br />
 
-<h2>Hej @TempData["Test"]!</h2>
-<p>@TempData["Test2"]</p>
+<br />
+<br />
+
 <h4>Uppdatera din email här</h4>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditEmail">
@@ -19,13 +23,17 @@
                 <label asp-for="Us_Email" class="control-label">Email</label>
                 <input asp-for="Us_Email" pattern = "[A-Za-z0-9._+-]+@@[A-Za-z0-9 -]+\.[A-Za-z]{2,}" title="Vänligen skriv emailformatet enligt följande test@email.com" class="form-control" type ="email" aria-invalid = "false" aria-describedBy="err_5" required maxlength="50"/>
                 <span asp-validation-for="Us_Email" class="text-danger" id="err_5"></span>
+                <br />
                 <input type = "submit" value ="Uppdatera" class ="btn-default" />
             </div>
 
         </form>
     </div>
 </div>
-
+<br />
+<br />
+<br />
+<br />
 <div>
     <a asp-action="ShowMyPage">Tillbaka till min sida</a>
 </div>

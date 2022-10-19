@@ -1,108 +1,98 @@
 ﻿@model HaikuLab3.Models.ViewModelHaikuRating
 
+ 
 
+ 
 
 @{
     ViewData["Title"] = "Details";
 }
 
-@foreach(HaikuLab3.Models.HaikuDetail HaikuDetail in Model.HaikuDetailList)
-
-@section MetaTags
-{
-    
-    <meta name = "description" content = "Haiku 2.0 är ett community för alla som älskar Haikus. Här kan du skriva egna haikus men också läsa och betygsätta andras" />
-    <meta name = "title" content = "@HaikuDetail.Ha_Title"/>
-    <meta name = "language" content = "sv"/>
-    <meta name = "type" content = "website"/>
-    <meta name = "keywords" content = "Haiku,@HaikuDetail.Ha_Alias,@HaikuDetail.Ha_Genre,dikter"/>
-    <meta name = "creator" content = "@HaikuDetail.Ha_Alias"/>
-    <meta name = "publisher" content = "M. Haldorson, B. Salminen"/>
  
 
-}
+@foreach (HaikuLab3.Models.HaikuDetail HaikuDetail in Model.HaikuDetailList)
+
+ 
+
+    @section MetaTags
+{
+
+ 
+
+        <meta name="description" content="Haiku 2.0 är ett community för alla som älskar Haikus. Här kan du skriva egna haikus men också läsa och betygsätta andras" />
+        <meta name="title" content="@HaikuDetail.Ha_Title" />
+        <meta name="language" content="sv" />
+        <meta name="type" content="website" />
+        <meta name="keywords" content="Haiku,@HaikuDetail.Ha_Alias,@HaikuDetail.Ha_Genre,dikter" />
+        <meta name="creator" content="@HaikuDetail.Ha_Alias" />
+        <meta name="publisher" content="M. Haldorson, B. Salminen" />
+
+ 
 
 
-<body>
-<h1>Visa haiku</h1>
-<h5>@ViewData["detailtest"]</h5>
+    }
 
+ 
 
+@foreach (HaikuLab3.Models.HaikuDetail HaikuDetail in Model.HaikuDetailList)
+{
+    <h1 class="my-5">@HaikuDetail.Ha_Title</h1>
 
-<div>
-<hr />
+ 
 
-<dl class="row">
+    <hr />
+    <div class="d-flex justify-content-center my-5 py-5">
+        <figure class="text-end mb-0">
+            <blockquote class="blockquote mb-4">
+                <p><em>@HaikuDetail.Ha_Content</em></p>
 
-    @foreach(HaikuLab3.Models.HaikuDetail HaikuDetail in Model.HaikuDetailList)
-    {
+ 
 
-     <dt class="col-sm-2">
-            Titel
-           
-    </dt    >
-        <dd class="col-sm-10">
-            @HaikuDetail.Ha_Title
-    </dd    >
-        <dt class="col-sm-2">
-            Text
-
-       </dt>
-        <dd class="col-sm-10">
-            @HaikuDetail.Ha_Content
-        </dd>
-        <dt class="col-sm-2">
-            Författare
-
-
-
-       </dt>
-        <dd class="col-sm-10">
-            @Html.ActionLink(@HaikuDetail.Ha_Alias, "ShowProfilePage", "User", new { id= HaikuDetail.Ha_Alias }) 
-        </dd>
-        <dt class="col-sm-2">
-            Genre
-
-
-
-       </dt>
-        <dd class="col-sm-10">
-            @HaikuDetail.Ha_Genre
-        </dd>
-
-         <td>
-                @Html.ActionLink("Betygsätt", "InsertRatingForm", "Start", new { id= HaikuDetail.Ha_Title })
-            </td>
-    
-}
-
-</dl>
-</div>
-
-<div>
-    <dl class="row">
-
-        @foreach(HaikuLab3.Models.RatingDetail RatingDetail in Model.RatingDetailList)
- {
-         <dt class = "col-sm-2">
-            Betyg
-        </dt>
-        <dd class = "col-sm-10">
-            @RatingDetail.Ra_RatingAverage
-        </dd>
-        <dt class = "col-sm-2">
-            Antal röster
-        </dt>
-        <dd class = "col-sm-10">
-            @RatingDetail.Ra_Votes
-        </dd>
-       
- }
- </dl>
-</div>
-
-<div> 
-    <a asp-action="Home">Till startsidan</a>  <a asp-action="Testtest">Se alla haikus</a> 
+            </blockquote>
+            <figcaption class="blockquote-footer mb-0">
+                @Html.ActionLink(@HaikuDetail.Ha_Alias, "ShowProfilePage", "User", new { id = HaikuDetail.Ha_Alias })
+            </figcaption>
+        </figure>
     </div>
 
-</body>
+ 
+
+    <hr class="mb-5" />
+}
+
+ 
+
+
+<div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center" style="position:relative;">
+    <img src="~/images/Cool Kids - Cat.svg" class="d-none d-lg-block" />
+
+ 
+
+    @foreach (HaikuLab3.Models.HaikuDetail HaikuDetail in Model.HaikuDetailList)
+    {
+        @Html.ActionLink("Betygsätt", "InsertRatingForm", "Start", new { id = HaikuDetail.Ha_Title }, new { @class = "btn btn-lg btn-primary d-none d-lg-block", @style = "position: absolute; left: 50%; transform: translate(-50%, 0);" })
+        @Html.ActionLink("Betygsätt", "InsertRatingForm", "Start", new { id = HaikuDetail.Ha_Title }, new { @class = "btn btn-lg btn-primary d-lg-none" })
+
+ 
+
+    }
+    
+    <ul class="list-group mt-4 mt-lg-0">
+        @foreach (HaikuLab3.Models.HaikuDetail HaikuDetail in Model.HaikuDetailList)
+        {
+            <li class="list-group-item"><strong>Skapad: </strong>@HaikuDetail.Ha_Date</li>
+            <li class="list-group-item"><strong>Genre: </strong>@HaikuDetail.Ha_Genre</li>
+        }
+        @foreach (HaikuLab3.Models.RatingDetail RatingDetail in Model.RatingDetailList)
+        {
+            <li class="list-group-item"><strong>Betyg: </strong>@RatingDetail.Ra_RatingAverage</li>
+            <li class="list-group-item"><strong>Antal röster: </strong>@RatingDetail.Ra_Votes</li>
+        }
+    </ul>
+</div>
+
+ 
+
+<div class="text-center my-5">
+    <a asp-action="Home">Till startsidan</a> | <a asp-action="Testtest">Se alla haikus</a>
+</div>

@@ -1,9 +1,24 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "DeleteUserFail";
 }
 
-<h2>Error</h2>
+ 
 
-<p>Användare kunde inte raderas!</p>
-<p>Ett eventuellt felmeddelande: @ViewBag.error</p>
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" onclick="return redirect()"></button>
+    <strong>Användare kunde inte raderas!</strong> 
+</div>
+
+ 
+
+<script>
+    function redirect() {
+
+ 
+
+        window.location.href = '@Url.Action("Home", "Start")';
+
+ 
+
+    }
+</script>

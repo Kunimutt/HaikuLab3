@@ -2,7 +2,24 @@
     ViewData["Title"] = "LogInUserFail";
 }
 
-<h2>Error - Misslyckad inloggning</h2>
+ 
 
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" onclick="return redirect()"></button>
+    <strong>Inloggningen misslyckades!</strong> Kontrollera att du uppgett korrekt uppgifter <br />
+    @Html.ActionLink("Prova igen?", "LogInUser", "User", null, null).
+</div>
 
-<p>Ett eventuellt felmeddelande: @ViewBag.error</p>
+ 
+
+<script>
+    function redirect() {
+
+ 
+
+        window.location.href = '@Url.Action("Home", "Start")';
+
+ 
+
+    }
+</script>

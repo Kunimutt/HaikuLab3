@@ -19,7 +19,7 @@ namespace HaikuLab3.Models
 
         public string Ha_Alias { get; set; }
 
-        //public DateTime Ha_Date { get; set; } // osäker på denna
+        public string? Ha_Date { get; set; } // osäker på denna
 
         //public byte? Ha_Photo { get; set; } // osäker på om det ska vara string
 

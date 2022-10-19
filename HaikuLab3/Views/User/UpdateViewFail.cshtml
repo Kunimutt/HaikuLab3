@@ -1,10 +1,25 @@
 ﻿@{
-    ViewData["Title"] = "InsertHaikuFail";
+    ViewData["Title"] = "UpdateUserFail";
 }
 
-<h2>Error</h2>
+ 
 
-<p>Uppdateringen misslyckades!</p>
-<p>Ett eventuellt felmeddelande: @ViewBag.error</p>
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" onclick="return redirect()"></button>
+    <strong>Uppdateringen misslyckades!</strong> <br />
+    @Html.ActionLink("Tillbaka till start", "Home", "Start", null, null).
+</div>
 
+ 
 
+<script>
+    function redirect() {
+
+ 
+
+        window.location.href = '@Url.Action("Home", "Start")';
+
+ 
+
+    }
+</script>

@@ -2,67 +2,83 @@
 
  
 
+ 
+
 @{
     ViewData["Title"] = "Index";
 }
-
-<div class="row gap-lg-2 my-5 justify-content-center">
-    <div class="col-md-6 col-lg-5 col-xl-4 d-none d-md-block">
-        <img class="img-fluid" src="~/images/Cool Kids - Bust.svg" />
-    </div>
-    <div class="col-8 col-md-6 col-lg-5 col-xl-4 justify-content-center">
-        <div class="d-flex align-items-center justify-content-center gap-4">
-            <h2>Kontakta oss</h2>
-            <img style="width:40px;" src="~/images/Cool Kids - Email Open.svg" />
-           
+<div class="container-fluid">
+    <div class="row my-5 justify-content-lg-center">
+        <div class="col-5 d-none d-md-block">
+            <img class="img-fluid" src="~/images/Cool Kids - Bust.svg" />
         </div>
-         <p class="text-center">Använd kontaktformuläret nedan för att kontakta oss.<br /> Vill du överklaga en bedömning av din haiku, glöm inte att uppge hela dikten så att våra experter kan granska den.<br /><br />
-                Vi återkopplar så snart vi kan! :)</p>
-        <form asp-action="Index" onsubmit="return alert('Tack för ditt meddelande!')">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group text-start">
-                <label asp-for="CC" class="control-label">Från:</label>
-                <input asp-for="CC" type="email" class="form-control mb-3" required />
-                <span asp-validation-for="CC" class="text-danger"></span>
-            </div>
+        <div class="col justify-content-center">
+            <div class="d-flex justify-content-center gap-4 mb-3 align-items-end">
+                <h2 class="m-0">Kontakta oss</h2>
+                <img style="width:40px;" src="~/images/Cool Kids - Email Open.svg" />
 
-            <div class="form-group text-start">
-                <label asp-for="Subject" class="control-label">Välj ett ämne</label>
-                <select id="Subject" name="Subject" class="form-control form-select dropdown mb-3">
-                    <option value="Inloggning">Inloggning</option>
-                    <option value="Konto">Konto</option>
-                    <option value="Hjälp">Hjälp</option>
-                    <option value="Veckobrev">Veckobrev</option>
-                    <option value="Haikubedömning">Haikubedömning</option>
-                    <option value="Övrigt">Övrigt</option>
-                </select>
-            </div>
+ 
 
-            <div class="form-group text-start">
-                <label asp-for="Body" class="control-label">Meddelande:</label>
-                <textarea asp-for="Body" id="message" class="form-control" maxlength="250" style="resize:none;" rows="6" cols="100" required onkeyup="countChars();"></textarea>
-                <p id="counttext" class="text-end"><span id="inserthere">0</span>/250</p>
-                <span asp-validation-for="Body" class="text-danger"></span>
             </div>
+            <p class="text-center">
+                Använd kontaktformuläret nedan för att kontakta oss.<br /> Vill du överklaga en bedömning av din haiku? Glöm inte att uppge hela dikten så att våra experter kan granska den på nytt.<br /><br />
+                Vi återkopplar så snart vi kan! :)
+            </p>
+            <form asp-action="Index" onsubmit="return alert('Tack för ditt meddelande!')">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group text-start">
+                    <label asp-for="CC" class="control-label">Från:</label>
+                    <input asp-for="CC" type="email" class="form-control mb-3" required />
+                    <span asp-validation-for="CC" class="text-danger"></span>
+                </div>
 
-            <div class="form-group text-center">
-                <input type="submit" value="Skicka" class="btn btn-primary btn-lg" />
-            </div>
-        </form>
+ 
+
+                <div class="form-group text-start">
+                    <label asp-for="Subject" class="control-label">Välj ett ämne</label>
+                    <select id="Subject" name="Subject" class="form-control form-select dropdown mb-3">
+                        <option value="Inloggning">Inloggning</option>
+                        <option value="Konto">Konto</option>
+                        <option value="Hjälp">Hjälp</option>
+                        <option value="Veckobrev">Veckobrev</option>
+                        <option value="Haikubedömning">Haikubedömning</option>
+                        <option value="Övrigt">Övrigt</option>
+                    </select>
+                </div>
+
+ 
+
+                <div class="form-group text-start">
+                    <label asp-for="Body" class="control-label">Meddelande:</label>
+                    <textarea asp-for="Body" id="message" class="form-control" maxlength="250" style="resize:none;" rows="6" cols="100" required onkeyup="countChars();"></textarea>
+                    <p id="counttext" class="text-end"><span id="inserthere">0</span>/250</p>
+                    <span asp-validation-for="Body" class="text-danger"></span>
+                </div>
+
+ 
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Skicka" class="btn btn-primary btn-lg" />
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-2"></div>
     </div>
-    <div class="col-lg-1 col-xl-2"></div>
 </div>
 
  
 
+ 
 
 @section Scripts {
 
  
 
-    <script>
-    
-        function countChars() {
+ 
+
+    <script>function countChars() {
+
+ 
 
  
 
@@ -71,15 +87,18 @@
 
  
 
+ 
+
             var area = document.getElementById("inserthere");
             area.innerHTML = count;
 
  
 
-        }
-        
-    
-    </script>
+ 
+
+        }</script>
+
+ 
 
  
 

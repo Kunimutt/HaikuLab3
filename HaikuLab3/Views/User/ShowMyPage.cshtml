@@ -1,85 +1,89 @@
 ﻿@model HaikuLab3.Models.ViewModelUserHaiku
 
+ 
+
 @{
     ViewData["Title"] = "ShowMyPage";
 }
 
-<h1>Min sida</h1>
+ 
 
-<h4>Hej @TempData["Test"]!</h4>
+<h1 class="my-5">Min sida</h1>
+
+ 
+
 
 <div class="row">
-    <div class="col">
-        <div style="height: 300px; width: 300px; overflow: hidden; border: 1px solid #e5e5e5;">
+    <div class="col col-lg-4">
+        <div style="width: 300px; height:300px; overflow: hidden; border: 1px solid #e5e5e5;">
             <img class="img-fluid" src="~/uploads/@Model.userDetail.Us_Photo" />
         </div>
+        @Html.ActionLink("Lägg till profilbild", "AddPic", "User")
     </div>
-    <div class="col-8">
-    <h5>Mina uppgifter</h5>
-    <hr />
-    <dl class="row">
-        @foreach(HaikuLab3.Models.UserDetail UserDetail in Model.UserDetailList)
-        {
-            <dt class = "col-sm-2">
-            Förnamn
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Fname
-        </dd>
-          <dt class = "col-sm-2">
-            Efternamn
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Lname
-        </dd>
-          <dt class = "col-sm-2">
-            Alias
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Alias
-        </dd>
-          <dt class = "col-sm-2">
-            Födelseår
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Age
-        </dd>
-          <dt class = "col-sm-2">
-            Email
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Email
-        </dd>
-         <dt class = "col-sm-2">
-            Beskrivning
-        </dt>
-        <dd class = "col-sm-10">
-            @UserDetail.Us_Description
-        </dd>
-         }
+    <div class="col col-lg-8">
+        <h5 class="my-5 my-lg-0">Mina uppgifter</h5>
+        <hr />
+        <table class="d-flex flex-column justify-content-between table">
+            @foreach (HaikuLab3.Models.UserDetail UserDetail in Model.UserDetailList)
+            {
+                <tr>
+                    <th>Förnamn</th>
+                    <td>@UserDetail.Us_Fname</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Efternamn</th>
+                    <td>@UserDetail.Us_Lname</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Alias</th>
+                    <td>@UserDetail.Us_Alias</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Födelseår</th>
+                    <td>@UserDetail.Us_Age</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>@UserDetail.Us_Email</td>
+                    <td>@Html.ActionLink("Ändra email", "EditEmail", "User" /*new {id = Model.UserDetailList}*/)</td>
+                </tr>
+                <tr>
+                    <th>Beskrivning</th>
+                    <td>@UserDetail.Us_Description</td>
+                    <td>@Html.ActionLink("Uppdatera beskrivning", "AddDescription", "User")</td>
+                </tr>
+            }
+        </table>
+        
+    <div class="d-flex mt-5 mb-3">
+        <a asp-action="DeleteUser" class="btn btn-outline-danger btn-sm" onclick="return confirm ('Är du säker på att du vill radera din användare? OBS! Åtgärden är permanent.');">Ta bort användare</a>
+    </div>
+        
+    </div>
+</div>
 
-     </dl>
-     <div>
-    @Html.ActionLink("Ändra email", "EditEmail", "User" /*new {id = Model.UserDetailList}*/) |
-    @Html.ActionLink("Lägg till beskrivning", "AddDescription", "User") |
-    @Html.ActionLink("Lägg till profilbild", "AddPic", "User") |
-    @Html.ActionLink("Logga ut", "LogOutUser", "User") 
-    <a asp-action="DeleteUser" class="btn btn-outline-danger btn-sm" onclick="return confirm ('Är du säker på att du vill radera din användare? OBS! Åtgärden är permanent.');">Ta bort användare</a>
-    
-</div>
-</div>
-</div>
+ 
 
 <hr />
-<br />
-<br />
-<h5>Mina haikus</h5>
-<table class = "table">
+<div class="d-flex justify-content-between align-items-center my-5">
+    <h5>Mina haikus</h5>
+    <a asp-area="" asp-controller="Haiku" asp-action="InsertHaikuForm" class="btn btn-primary">Lägg till haiku</a>
+
+ 
+
+</div>
+<table class="table">
     <tr>
         <th>Titel</th>
         <th>Genre</th>
         <th></th>
     </tr>
+
+ 
 
     @foreach (HaikuLab3.Models.HaikuListDetail HaikuListDetail in Model.HaikuListDetailList)
     {
@@ -87,9 +91,12 @@
             <td>@HaikuListDetail.Hl_Title</td>
             <td>@HaikuListDetail.Hl_Genre</td>
             <td>
-                @Html.ActionLink("Visa haiku", "Details", "Start", new { id= HaikuListDetail.Hl_Title })
+                @Html.ActionLink("Visa haiku", "Details", "Start", new { id = HaikuListDetail.Hl_Title })
             </td>
         </tr>
     }
 
+ 
+
 </table>
+ 

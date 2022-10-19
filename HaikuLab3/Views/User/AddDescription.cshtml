@@ -4,13 +4,17 @@
     ViewData["Title"] = "AddDescription";
 }
 
+<br />
 <h1>Lägg till beskrivning</h1>
+<br />
+<br />
 
-<h2>Hej @TempData["Test"]!</h2>
-<h4>Lägg till en beskrivning här</h4>
+@*<h2>Hej @TempData["Test"]!</h2>
+<h4>Lägg till en beskrivning här</h4>*@
 <p>Notera att din beskrivning blir synlig för alla.</p>
 <p>Din beskrivning får innehålla max 100 tecken.</p>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddDescription">
@@ -20,13 +24,14 @@
                  <textarea rows="4" cols="50" style="resize:none;" class="form-control" id="description" name="description" onkeyup="countChars();" required maxlength="100"></textarea>
                 @*<input type="text" id="description" name="description"/>*@
                 <p id="counttext"> <span id = "inserthere">0</span>/100</p>
+                <br />
                 <input type = "submit" value ="Lägg till" class ="btn-default" />
             </div>
 
         </form>
     </div>
 </div>
-
+<br />
 <div>
     <a asp-action="ShowMyPage">Tillbaka till min sida</a>
 </div>

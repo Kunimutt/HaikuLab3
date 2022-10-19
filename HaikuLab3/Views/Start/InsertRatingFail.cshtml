@@ -1,15 +1,25 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "InsertRatingFail";
 }
 
-<h2>Error</h2>
+ 
 
-<p>Betyget kunde inte sättas!</p>
-<p>Ett eventuellt felmeddelande: @ViewBag.error</p>
-
-<div>
+<div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" onclick="return redirect()"></button>
+    <strong>Betyget kunde inte sättas!</strong> Ett eventuellt felmeddelande: @ViewBag.error.<br />
     @Html.ActionLink("Till alla haikus", "Testtest", "Start")
-
 </div>
 
+ 
+
+<script>
+    function redirect() {
+
+ 
+
+        window.location.href = '@Url.Action("Home", "Start")';
+
+ 
+
+    }
+</script>

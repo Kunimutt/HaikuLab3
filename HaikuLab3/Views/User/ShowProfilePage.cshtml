@@ -1,8 +1,12 @@
 ﻿@model HaikuLab3.Models.ViewModelUserHaiku
 
+ 
+
 @{
-    ViewData["Title"] = "ShowMyPage";
+    ViewData["Title"] = "ShowProfilePage";
 }
+
+ 
 
 @section MetaTags
 {
@@ -15,21 +19,50 @@
     <meta name = "publisher" content = "M. Haldorson, B. Salminen"/>
  
 
+ 
+
 }
 
-<h1 class="text-center my-5">@TempData["user"]s användarprofil</h1>
+ 
+
+<h1 class="my-5">@TempData["user"]s användarprofil</h1>
+
+ 
 
 
 <div class="row">
-    <div class="col">
+    <div class="col-lg-4">
         <div style="height: 300px; width: 300px; overflow: hidden; border: 1px solid #e5e5e5;">
             <img class="img-fluid" src="~/uploads/@Model.userDetail.Us_Photo" />
         </div>
     </div>
-    <div class="col-8">
-    <h5>Användaruppgifter</h5>
+    <div class="col-lg-8">
+    <h5 class="my-5 my-lg-0">Användaruppgifter</h5>
     <hr />
-    <dl class="row">
+    <table class="table">
+        @foreach (HaikuLab3.Models.UserDetail UserDetail in Model.UserDetailList)
+            {
+            <tr>
+                <th>Förnamn</th>
+                <td>@UserDetail.Us_Fname</td>
+
+ 
+
+            </tr>
+            <tr>
+                <th>Alias</th>
+                <td>@UserDetail.Us_Alias</td>
+            </tr>
+            <tr>
+                <th>Beskrivning</th>
+                <td>@UserDetail.Us_Description</td>
+            </tr>
+            }
+    </table>
+
+ 
+
+    @*<dl class="row">
         @foreach(HaikuLab3.Models.UserDetail UserDetail in Model.UserDetailList)
         {
             <dt class = "col-sm-2">
@@ -45,7 +78,7 @@
         <dd class = "col-sm-10">
             @UserDetail.Us_Alias
         </dd>
-        <br />
+        
         <dt class = "col-sm-2">
             Beskrivning
         </dt>
@@ -54,19 +87,26 @@
         </dd>
          }
 
-     </dl>
+ 
+
+     </dl>*@
      </div>
 </div>
 
-<hr />
-<br />
-<br />
-<h5>Haikus</h5>
+ 
+
+<hr class="my-5" />
+
+ 
+
+<h5 class="mb-5">Haikus</h5>
 <table class = "table">
     <tr>
         <th>Titel</th>
         <th>Genre</th>
     </tr>
+
+ 
 
     @foreach (HaikuLab3.Models.HaikuListDetail HaikuListDetail in Model.HaikuListDetailList)
     {
@@ -79,7 +119,9 @@
         </tr>
     }
 
+ 
+
 </table>
-<div>
+<div class="text-center">
     @Html.ActionLink("Till startsidan", "Home", "Start", null, null)
 </div>
