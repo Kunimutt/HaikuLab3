@@ -10,12 +10,12 @@
 <div class="container-fluid">
     <div class="row my-5 justify-content-lg-center">
         <div class="col-5 d-none d-md-block">
-            <img class="img-fluid" src="~/images/Cool Kids - Bust.svg" />
+            <img alt ="bild"class="img-fluid" src="~/images/Cool Kids - Bust.svg" />
         </div>
         <div class="col justify-content-center">
             <div class="d-flex justify-content-center gap-4 mb-3 align-items-end">
                 <h2 class="m-0">Kontakta oss</h2>
-                <img style="width:40px;" src="~/images/Cool Kids - Email Open.svg" />
+                <img alt = "bild" style="width:40px;" src="~/images/Cool Kids - Email Open.svg" />
 
  
 
@@ -50,7 +50,7 @@
 
                 <div class="form-group text-start">
                     <label asp-for="Body" class="control-label">Meddelande:</label>
-                    <textarea asp-for="Body" id="message" class="form-control" maxlength="250" style="resize:none;" rows="6" cols="100" required onkeyup="countChars();"></textarea>
+                    <textarea asp-for="Body" class="form-control" maxlength="250" style="resize:none;" rows="6" cols="100" required onkeyup="countChars();"></textarea>
                     <p id="counttext" class="text-end"><span id="inserthere">0</span>/250</p>
                     <span asp-validation-for="Body" class="text-danger"></span>
                 </div>
@@ -82,7 +82,7 @@
 
  
 
-            var input = document.getElementById("message").value;
+            var input = document.getElementById("Body").value;
             let count = input.length;
 
  

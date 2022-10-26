@@ -96,10 +96,11 @@ namespace HaikuLab3.Controllers
         }
 
         [HttpPost]
-        public IActionResult Testtest(string search)
+        public IActionResult Testtest(string search1, string search2)
         {
 
-            if (search == null)
+
+            if (search1 == null && search2 == null)
             {
                 HaikuListMethods hlm = new HaikuListMethods();
                 GenreMethods gm = new GenreMethods();
@@ -112,26 +113,43 @@ namespace HaikuLab3.Controllers
                 return View(vmhl);
 
             }
-            else
+            else if (search1 == null && search2 != null)
             {
                 HaikuListMethods hlm = new HaikuListMethods();
                 GenreMethods gm = new GenreMethods();
                 ViewModelHaikuList vmhl = new ViewModelHaikuList
                 {
                     GenreDetailList = gm.SelectGenreList(out string errormsg3),
-                    HaikuListDetailList = hlm.SearchHaikuList(out string errormsg2, search),
+                    HaikuListDetailList = hlm.SearchHaikuList(out string errormsg2, search2),
                     //HaikuListDetailList2 = hlm.SelectHaikuList(out string errormsg1, search),
 
 
                 };
 
-                ViewData["val"] = search;
+                ViewData["val"] = search2;
                 ViewBag.error = "1: " + errormsg2 + "2: " + errormsg3;
                 return View(vmhl);
 
             }
+            else if (search1 != null && search2 == null)
+            {
+                HaikuListMethods hlm = new HaikuListMethods();
+                GenreMethods gm = new GenreMethods();
+                ViewModelHaikuList vmhl = new ViewModelHaikuList
+                {
+                    GenreDetailList = gm.SelectGenreList(out string errormsg3),
+                    HaikuListDetailList = hlm.SearchHaikuList(out string errormsg2, search1),
+                    //HaikuListDetailList2 = hlm.SelectHaikuList(out string errormsg1, search),
 
-            
+
+                };
+
+                ViewData["val"] = search1;
+                ViewBag.error = "1: " + errormsg2 + "2: " + errormsg3;
+                return View(vmhl);
+            }
+
+            return View();
         }
 
 

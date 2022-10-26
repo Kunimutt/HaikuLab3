@@ -197,15 +197,15 @@ namespace HaikuLab3.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditEmail(UserDetail ud)
+        public IActionResult EditEmail(string mail)
         {
             if (ModelState.IsValid)
             {
-                string email = ud.Us_Email;
+                //string email = ud.Us_Email;
                 string jsonstring = HttpContext.Session.GetString("testSession");
                 if (jsonstring == null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Home", "Start");
                 }
                 string alias = JsonConvert.DeserializeObject<string>(jsonstring);
                 //string alias = uu.Us_Alias;
@@ -216,7 +216,7 @@ namespace HaikuLab3.Controllers
                 int i = 0;
                 string error = "";
 
-                i = um.UpdateUserEmail(alias, email, out error);
+                i = um.UpdateUserEmail(alias, mail, out error);
 
                 ViewBag.error = error;
                 ViewBag.antal = i;

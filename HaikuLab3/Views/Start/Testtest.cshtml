@@ -20,13 +20,13 @@
     <div class="form-group col-10 col-md-8 col-lg-6 mx-auto">
         <form asp-action="Testtest">
             <div class="form-group d-flex">
-                <input class="form-control" type="text" id="search" name="search" />
+                <input class="form-control" type="text" id="search1" name="search1" />
                 <input type="submit" value="Sök" class="btn btn-secondary" id="button"/>
             </div>
         </form>
         <form asp-action="Testtest">
             <div class="form-group d-flex col-8 mt-3">
-                <select class="form-control form-select dropdown" id="search" name="search">
+                <select class="form-control form-select dropdown" id="search2" name="search2">
                     @foreach (HaikuLab3.Models.GenreDetail GenreDetail in Model.GenreDetailList)
                     {
                         <option value="@GenreDetail.Ge_Name"> @GenreDetail.Ge_Name </option>
@@ -48,7 +48,7 @@
 
 <div class="row mt-5">
     <div class="col d-none d-md-block">
-        <img src="~/images/Cool Kids - Standing.svg" class="img-fluid" />
+        <img alt = "bild" src="~/images/Cool Kids - Standing.svg" class="img-fluid" />
     </div>
     <div class="col col-md-8">
         <table class="table table-hover" id="testsortering">
